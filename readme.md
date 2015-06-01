@@ -2,14 +2,26 @@
 
 > Adds useful debug features to your [Electron](http://electron.atom.io) app
 
-Ideas for more features welcome!
+Ideas for more debug features [welcome!](https://github.com/sindresorhus/electron-debug/issues/new)
 
 
 ## Features
 
 ### Dev Tools
 
-Press `Alt+Cmd+I` on OS X or `Alt+Ctrl+I` on Linux and Windows to toggle Dev Tools.
+Toggle Dev Tools.
+
+- OS X: `Alt+Cmd+I`
+- Linux: `Alt+Ctrl+I`
+- Windows: `Alt+Ctrl+I`
+
+### Reload
+
+Force reload the window.
+
+- OS X: `Cmd+R`
+- Linux: `Ctrl+R`
+- Windows: `Ctrl+R`
 
 
 ## Install

@@ -12,5 +12,13 @@ module.exports = function () {
 				win.toggleDevTools();
 			}
 		});
+
+		globalShortcut.register('CmdOrCtrl+R', function () {
+			var win = BrowserWindow.getFocusedWindow();
+
+			if (win) {
+				win.reloadIgnoringCache();
+			}
+		});
 	});
 };

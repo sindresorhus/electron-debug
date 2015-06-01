@@ -1,14 +1,16 @@
 'use strict';
-var globalShortcut = require('global-shortcut');
+const app = require('app');
+const globalShortcut = require('global-shortcut');
+const BrowserWindow = require('browser-window');
 
-module.exports = function (win) {
-	win.on('focus', function () {
+module.exports = function () {
+	app.on('ready', function () {
 		globalShortcut.register('Alt+CmdOrCtrl+I', function () {
-			win.toggleDevTools();
-		});
-	});
+			var win = BrowserWindow.getFocusedWindow();
 
-	win.on('blur', function () {
-		globalShortcut.unregister('Alt+CmdOrCtrl+I');
+			if (win) {
+				win.toggleDevTools();
+			}
+		});
 	});
 };

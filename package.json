@@ -12,9 +12,6 @@
   "engines": {
     "node": ">=0.12.0"
   },
-  "scripts": {
-    "test": "node test.js"
-  },
   "files": [
     "index.js"
   ],

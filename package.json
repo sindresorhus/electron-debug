@@ -1,0 +1,28 @@
+{
+  "name": "electron-debug",
+  "version": "0.0.0",
+  "description": "Adds useful debug features to your Electron app",
+  "license": "MIT",
+  "repository": "sindresorhus/electron-debug",
+  "author": {
+    "name": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "sindresorhus.com"
+  },
+  "engines": {
+    "node": ">=0.12.0"
+  },
+  "scripts": {
+    "test": "node test.js"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "electron",
+    "debug",
+    "devtools",
+    "app",
+    "dev"
+  ]
+}

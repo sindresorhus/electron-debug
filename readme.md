@@ -11,9 +11,9 @@ Ideas for more debug features [welcome!](https://github.com/sindresorhus/electro
 
 Toggle Dev Tools.
 
-- OS X: `Alt+Cmd+I`
-- Linux: `Alt+Ctrl+I`
-- Windows: `Alt+Ctrl+I`
+- OS X: `Cmd+Alt+I`
+- Linux: `Ctrl+Shift+I`
+- Windows: `Ctrl+Shift+I`
 
 ### Reload
 

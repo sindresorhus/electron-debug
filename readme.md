@@ -11,17 +11,17 @@ Ideas for more debug features [welcome!](https://github.com/sindresorhus/electro
 
 Toggle Dev Tools.
 
-- OS X: `Cmd+Alt+I`
-- Linux: `Ctrl+Shift+I`
-- Windows: `Ctrl+Shift+I`
+- OS X: <kbd>Cmd</kbd> <kbd>Alt</kbd> <kbd>I</kbd>
+- Linux: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>I</kbd>
+- Windows: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>I</kbd>
 
 ### Reload
 
 Force reload the window.
 
-- OS X: `Cmd+R`
-- Linux: `Ctrl+R`
-- Windows: `Ctrl+R`
+- OS X: <kbd>Cmd</kbd> <kbd>I</kbd>
+- Linux: <kbd>Ctrl</kbd> <kbd>I</kbd>
+- Windows: <kbd>Ctrl</kbd> <kbd>I</kbd>
 
 
 ## Install

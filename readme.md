@@ -19,9 +19,9 @@ Toggle Dev Tools.
 
 Force reload the window.
 
-- OS X: <kbd>Cmd</kbd> <kbd>I</kbd>
-- Linux: <kbd>Ctrl</kbd> <kbd>I</kbd>
-- Windows: <kbd>Ctrl</kbd> <kbd>I</kbd>
+- OS X: <kbd>Cmd</kbd> <kbd>R</kbd>
+- Linux: <kbd>Ctrl</kbd> <kbd>R</kbd>
+- Windows: <kbd>Ctrl</kbd> <kbd>R</kbd>
 
 
 ## Install

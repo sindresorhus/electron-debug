@@ -6,20 +6,26 @@ const isOSX = process.platform === 'darwin';
 
 module.exports = function () {
 	app.on('ready', function () {
-		globalShortcut.register(isOSX ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', function () {
+		globalShortcut.register(isOSX ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);
+		globalShortcut.register('F12', devTools);
+
+		globalShortcut.register('CmdOrCtrl+R', refresh);
+		globalShortcut.register('F5', refresh);
+
+		function devTools() {
 			var win = BrowserWindow.getFocusedWindow();
 
 			if (win) {
 				win.toggleDevTools();
 			}
-		});
+		}
 
-		globalShortcut.register('CmdOrCtrl+R', function () {
+		function refresh() {
 			var win = BrowserWindow.getFocusedWindow();
 
 			if (win) {
 				win.reloadIgnoringCache();
 			}
-		});
+		}
 	});
 };

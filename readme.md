@@ -34,12 +34,17 @@ $ npm install --save electron-debug
 ## Usage
 
 ```js
+var app = require('app');
+
 require('electron-debug')();
 
 let win;
 
 app.on('ready', function () {
-	win = new BrowserWindow({});
+	win = new BrowserWindow({
+		width: 800,
+		height: 600
+	});
 });
 ```
 

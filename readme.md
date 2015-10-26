@@ -25,8 +25,7 @@ Force reload the window.
 
 ### Inspect element
 
-Right click on a HTML element to inspect it on Dev Tools like
-in Chromium. Works only when Dev Tools is already open.
+Right-click on an HTML element when DevTools is open to inspect it.
 
 
 ## Install

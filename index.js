@@ -5,7 +5,7 @@ const BrowserWindow = require('browser-window');
 const isOSX = process.platform === 'darwin';
 
 function devTools() {
-	var win = BrowserWindow.getFocusedWindow();
+	const win = BrowserWindow.getFocusedWindow();
 
 	if (win) {
 		win.toggleDevTools();
@@ -13,7 +13,7 @@ function devTools() {
 }
 
 function refresh() {
-	var win = BrowserWindow.getFocusedWindow();
+	const win = BrowserWindow.getFocusedWindow();
 
 	if (win) {
 		win.reloadIgnoringCache();
@@ -22,17 +22,18 @@ function refresh() {
 
 function activateDebugContextMenu(e) {
 	const webContents = e.sender;
-	webContents.executeJavaScript(`require('${__dirname}/debug-context-menu').install();`);
+	webContents.executeJavaScript(`require('${__dirname}/context-menu').install();`);
 }
 
 function deactivateDebugContextMenu(e) {
 	const webContents = e.sender;
-	webContents.executeJavaScript(`require('${__dirname}/debug-context-menu').uninstall();`);
+	webContents.executeJavaScript(`require('${__dirname}/context-menu').uninstall();`);
 }
 
 function installDebugContextMenu(win) {
 	win.webContents.on('devtools-opened', activateDebugContextMenu);
 	win.webContents.on('devtools-closed', deactivateDebugContextMenu);
+
 	if (win.webContents.isDevToolsOpened()) {
 		activateDebugContextMenu({sender: win.webContents});
 	}
@@ -43,9 +44,9 @@ function uninstallDebugContextMenu(win) {
 	win.webContents.removeListener('devtools-closed', deactivateDebugContextMenu);
 }
 
-module.exports = function () {
-	app.on('ready', function () {
-		app.on('browser-window-focus', function (e, win) {
+module.exports = () => {
+	app.on('ready', () => {
+		app.on('browser-window-focus', (e, win) => {
 			globalShortcut.register(isOSX ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);
 			globalShortcut.register('F12', devTools);
 
@@ -55,7 +56,7 @@ module.exports = function () {
 			installDebugContextMenu(win);
 		});
 
-		app.on('browser-window-blur', function (e, win) {
+		app.on('browser-window-blur', (e, win) => {
 			globalShortcut.unregister(isOSX ? 'Cmd+Alt+I' : 'Ctrl+Shift+I');
 			globalShortcut.unregister('F12');
 

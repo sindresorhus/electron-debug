@@ -32,9 +32,10 @@
     "xo": "*"
   },
   "xo": {
-    "globals": [
-      "atom",
-      "window"
+    "esnext": true,
+    "envs": [
+      "node",
+      "browser"
     ]
   }
 }

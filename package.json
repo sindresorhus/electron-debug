@@ -13,6 +13,7 @@
     "node": ">=0.12.0"
   },
   "scripts": {
+    "start": "electron test.js",
     "test": "xo"
   },
   "files": [
@@ -26,6 +27,7 @@
     "dev"
   ],
   "devDependencies": {
+    "electron-prebuilt": "^0.34.1",
     "xo": "*"
   },
   "xo": {

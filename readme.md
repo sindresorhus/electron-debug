@@ -23,6 +23,11 @@ Force reload the window.
 - Linux: <kbd>Ctrl</kbd> <kbd>R</kbd> or <kbd>F5</kbd>
 - Windows: <kbd>Ctrl</kbd> <kbd>R</kbd> or <kbd>F5</kbd>
 
+### Inspect element
+
+Right click on a HTML element to inspect it on Dev Tools like
+in Chromium. Works only when Dev Tools is already open.
+
 
 ## Install
 

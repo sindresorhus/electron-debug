@@ -4,8 +4,8 @@ const globalShortcut = require('global-shortcut');
 const BrowserWindow = require('browser-window');
 const isOSX = process.platform === 'darwin';
 
-function devTools() {
-	const win = BrowserWindow.getFocusedWindow();
+function devTools(win) {
+	win = win || BrowserWindow.getFocusedWindow();
 
 	if (win) {
 		win.toggleDevTools();
@@ -44,8 +44,16 @@ function uninstallDebugContextMenu(win) {
 	win.webContents.removeListener('devtools-closed', deactivateDebugContextMenu);
 }
 
-module.exports = () => {
+module.exports = opts => {
+	opts = opts || {};
+
 	app.on('ready', () => {
+		if (opts.showDevTools) {
+			app.once('browser-window-created', (e, win) => {
+				devTools(win);
+			});
+		}
+
 		app.on('browser-window-focus', (e, win) => {
 			globalShortcut.register(isOSX ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);
 			globalShortcut.register('F12', devTools);

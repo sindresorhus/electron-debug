@@ -22,12 +22,12 @@ function refresh() {
 
 function activateDebugContextMenu(e) {
 	const webContents = e.sender;
-	webContents.executeJavaScript(`require('${__dirname}/context-menu').install();`);
+	webContents.executeJavaScript(`window.__electron_debug.require('${__dirname}/context-menu').install();`);
 }
 
 function deactivateDebugContextMenu(e) {
 	const webContents = e.sender;
-	webContents.executeJavaScript(`require('${__dirname}/context-menu').uninstall();`);
+	webContents.executeJavaScript(`window.__electron_debug.require('${__dirname}/context-menu').uninstall();`);
 }
 
 function installDebugContextMenu(win) {
@@ -45,25 +45,27 @@ function uninstallDebugContextMenu(win) {
 }
 
 module.exports = () => {
-	app.on('ready', () => {
-		app.on('browser-window-focus', (e, win) => {
-			globalShortcut.register(isOSX ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);
-			globalShortcut.register('F12', devTools);
+	app.on('browser-window-created', (e, win) => {
+		win.webContents.executeJavaScript('window.__electron_debug = {require: window.require};');
+	});
 
-			globalShortcut.register('CmdOrCtrl+R', refresh);
-			globalShortcut.register('F5', refresh);
+	app.on('browser-window-focus', (e, win) => {
+		globalShortcut.register(isOSX ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);
+		globalShortcut.register('F12', devTools);
 
-			installDebugContextMenu(win);
-		});
+		globalShortcut.register('CmdOrCtrl+R', refresh);
+		globalShortcut.register('F5', refresh);
 
-		app.on('browser-window-blur', (e, win) => {
-			globalShortcut.unregister(isOSX ? 'Cmd+Alt+I' : 'Ctrl+Shift+I');
-			globalShortcut.unregister('F12');
+		installDebugContextMenu(win);
+	});
 
-			globalShortcut.unregister('CmdOrCtrl+R');
-			globalShortcut.unregister('F5');
+	app.on('browser-window-blur', (e, win) => {
+		globalShortcut.unregister(isOSX ? 'Cmd+Alt+I' : 'Ctrl+Shift+I');
+		globalShortcut.unregister('F12');
 
-			uninstallDebugContextMenu(win);
-		});
+		globalShortcut.unregister('CmdOrCtrl+R');
+		globalShortcut.unregister('F5');
+
+		uninstallDebugContextMenu(win);
 	});
 };

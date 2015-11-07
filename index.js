@@ -4,8 +4,8 @@ const BrowserWindow = require('browser-window');
 const localShortcut = require('electron-localshortcut');
 const isOSX = process.platform === 'darwin';
 
-function devTools() {
-	const win = BrowserWindow.getFocusedWindow();
+function devTools(win) {
+	win = win || BrowserWindow.getFocusedWindow();
 
 	if (win) {
 		win.toggleDevTools();
@@ -44,9 +44,15 @@ function uninstallDebugContextMenu(win) {
 	win.webContents.removeListener('devtools-closed', deactivateDebugContextMenu);
 }
 
-module.exports = () => {
+module.exports = opts => {
+	opts = opts || {};
+
 	app.on('browser-window-created', (e, win) => {
 		win.webContents.executeJavaScript('window.__electron_debug = {require: window.require};');
+
+		if (opts.showDevTools) {
+			devTools(win);
+		}
 	});
 
 	app.on('ready', () => {

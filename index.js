@@ -1,7 +1,7 @@
 'use strict';
 const app = require('app');
-const globalShortcut = require('global-shortcut');
 const BrowserWindow = require('browser-window');
+const localShortcut = require('electron-localshortcut');
 const isOSX = process.platform === 'darwin';
 
 function devTools(win) {
@@ -22,12 +22,12 @@ function refresh() {
 
 function activateDebugContextMenu(e) {
 	const webContents = e.sender;
-	webContents.executeJavaScript(`require('${__dirname}/context-menu').install();`);
+	webContents.executeJavaScript(`window.__electron_debug.require('${__dirname}/context-menu').install();`);
 }
 
 function deactivateDebugContextMenu(e) {
 	const webContents = e.sender;
-	webContents.executeJavaScript(`require('${__dirname}/context-menu').uninstall();`);
+	webContents.executeJavaScript(`window.__electron_debug.require('${__dirname}/context-menu').uninstall();`);
 }
 
 function installDebugContextMenu(win) {
@@ -47,31 +47,27 @@ function uninstallDebugContextMenu(win) {
 module.exports = opts => {
 	opts = opts || {};
 
-	app.on('ready', () => {
+	app.on('browser-window-created', (e, win) => {
+		win.webContents.executeJavaScript('window.__electron_debug = {require: window.require};');
+
 		if (opts.showDevTools) {
-			app.once('browser-window-created', (e, win) => {
-				devTools(win);
-			});
+			devTools(win);
 		}
+	});
 
-		app.on('browser-window-focus', (e, win) => {
-			globalShortcut.register(isOSX ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);
-			globalShortcut.register('F12', devTools);
+	app.on('ready', () => {
+		localShortcut.register(isOSX ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);
+		localShortcut.register('F12', devTools);
 
-			globalShortcut.register('CmdOrCtrl+R', refresh);
-			globalShortcut.register('F5', refresh);
+		localShortcut.register('CmdOrCtrl+R', refresh);
+		localShortcut.register('F5', refresh);
+	});
 
-			installDebugContextMenu(win);
-		});
+	app.on('browser-window-focus', (e, win) => {
+		installDebugContextMenu(win);
+	});
 
-		app.on('browser-window-blur', (e, win) => {
-			globalShortcut.unregister(isOSX ? 'Cmd+Alt+I' : 'Ctrl+Shift+I');
-			globalShortcut.unregister('F12');
-
-			globalShortcut.unregister('CmdOrCtrl+R');
-			globalShortcut.unregister('F5');
-
-			uninstallDebugContextMenu(win);
-		});
+	app.on('browser-window-blur', (e, win) => {
+		uninstallDebugContextMenu(win);
 	});
 };

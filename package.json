@@ -1,6 +1,6 @@
 {
   "name": "electron-debug",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "description": "Adds useful debug features to your Electron app",
   "license": "MIT",
   "repository": "sindresorhus/electron-debug",
@@ -8,9 +8,6 @@
     "name": "Sindre Sorhus",
     "email": "sindresorhus@gmail.com",
     "url": "sindresorhus.com"
-  },
-  "engines": {
-    "node": ">=0.12.0"
   },
   "scripts": {
     "start": "electron test.js",
@@ -37,5 +34,8 @@
       "node",
       "browser"
     ]
+  },
+  "dependencies": {
+    "electron-localshortcut": "^0.3.0"
   }
 }

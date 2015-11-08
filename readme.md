@@ -23,11 +23,6 @@ Force reload the window.
 - Linux: <kbd>Ctrl</kbd> <kbd>R</kbd> or <kbd>F5</kbd>
 - Windows: <kbd>Ctrl</kbd> <kbd>R</kbd> or <kbd>F5</kbd>
 
-### Inspect element
-
-Right-click on an HTML element when DevTools is open to inspect it.
-
-Note: this features has been moved to [its own package](https://github.com/parro-it/debug-menu). Please refer to it for related issues.
 
 ## Install
 

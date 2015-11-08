@@ -24,8 +24,11 @@
     "app",
     "dev"
   ],
+  "dependencies": {
+    "electron-localshortcut": "^0.3.2"
+  },
   "devDependencies": {
-    "electron-prebuilt": "^0.34.1",
+    "electron-prebuilt": "^0.34.3",
     "xo": "*"
   },
   "xo": {
@@ -34,8 +37,5 @@
       "node",
       "browser"
     ]
-  },
-  "dependencies": {
-    "electron-localshortcut": "^0.3.0"
   }
 }

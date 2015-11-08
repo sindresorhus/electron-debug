@@ -7,9 +7,9 @@ Ideas for more debug features [welcome!](https://github.com/sindresorhus/electro
 
 ## Features
 
-### Dev Tools
+### DevTools
 
-Toggle Dev Tools.
+Toggle DevTools.
 
 - OS X: <kbd>Cmd</kbd> <kbd>Alt</kbd> <kbd>I</kbd> or <kbd>F12</kbd>
 - Linux: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>I</kbd> or <kbd>F12</kbd>
@@ -34,7 +34,7 @@ $ npm install --save electron-debug
 ## Usage
 
 ```js
-var app = require('app');
+const app = require('app');
 
 require('electron-debug')({
 	showDevTools: true
@@ -42,7 +42,7 @@ require('electron-debug')({
 
 let win;
 
-app.on('ready', function () {
+app.on('ready', () => {
 	win = new BrowserWindow({
 		width: 800,
 		height: 600
@@ -54,7 +54,10 @@ app.on('ready', function () {
 
 #### showDevTools
 
-If true, DevTools will be open when app has been started.
+Type: `boolean`  
+Default: `false`
+
+Show DevTools on startup.
 
 
 ## Related

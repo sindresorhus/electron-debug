@@ -20,30 +20,6 @@ function refresh() {
 	}
 }
 
-function activateDebugContextMenu(e) {
-	const webContents = e.sender;
-	webContents.executeJavaScript(`window.__electron_debug.require('${__dirname}/context-menu').install();`);
-}
-
-function deactivateDebugContextMenu(e) {
-	const webContents = e.sender;
-	webContents.executeJavaScript(`window.__electron_debug.require('${__dirname}/context-menu').uninstall();`);
-}
-
-function installDebugContextMenu(win) {
-	win.webContents.on('devtools-opened', activateDebugContextMenu);
-	win.webContents.on('devtools-closed', deactivateDebugContextMenu);
-
-	if (win.webContents.isDevToolsOpened()) {
-		activateDebugContextMenu({sender: win.webContents});
-	}
-}
-
-function uninstallDebugContextMenu(win) {
-	win.webContents.removeListener('devtools-opened', activateDebugContextMenu);
-	win.webContents.removeListener('devtools-closed', deactivateDebugContextMenu);
-}
-
 module.exports = opts => {
 	opts = opts || {};
 
@@ -51,8 +27,6 @@ module.exports = opts => {
 		if (opts.showDevTools) {
 			devTools(win);
 		}
-
-		win.webContents.executeJavaScript('window.__electron_debug = {require: window.require};');
 	});
 
 	app.on('ready', () => {
@@ -61,13 +35,5 @@ module.exports = opts => {
 
 		localShortcut.register('CmdOrCtrl+R', refresh);
 		localShortcut.register('F5', refresh);
-	});
-
-	app.on('browser-window-focus', (e, win) => {
-		installDebugContextMenu(win);
-	});
-
-	app.on('browser-window-blur', (e, win) => {
-		uninstallDebugContextMenu(win);
 	});
 };

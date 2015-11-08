@@ -23,10 +23,6 @@ Force reload the window.
 - Linux: <kbd>Ctrl</kbd> <kbd>R</kbd> or <kbd>F5</kbd>
 - Windows: <kbd>Ctrl</kbd> <kbd>R</kbd> or <kbd>F5</kbd>
 
-### Inspect element
-
-Right-click on an HTML element when DevTools is open to inspect it.
-
 
 ## Install
 
@@ -41,16 +37,16 @@ $ npm install --save electron-debug
 var app = require('app');
 
 require('electron-debug')({
-	showDevTools: true
+  showDevTools: true
 });
 
 let win;
 
 app.on('ready', function () {
-	win = new BrowserWindow({
-		width: 800,
-		height: 600
-	});
+  win = new BrowserWindow({
+    width: 800,
+    height: 600
+  });
 });
 ```
 
@@ -60,6 +56,13 @@ app.on('ready', function () {
 
 If true, DevTools will be open when app has been started.
 
+## Related
+
+- [debug-menu](https://github.com/parro-it/debug-menu) - Chromium-like debug context-menu for [Electron](http://electron.atom.io)
+
+
 ## License
 
 MIT © [Sindre Sorhus](http://sindresorhus.com)
+
+

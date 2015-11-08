@@ -40,7 +40,9 @@ $ npm install --save electron-debug
 ```js
 var app = require('app');
 
-require('electron-debug')();
+require('electron-debug')({
+	showDevTools: true
+});
 
 let win;
 
@@ -52,6 +54,11 @@ app.on('ready', function () {
 });
 ```
 
+### Options
+
+#### showDevTools
+
+If true, DevTools will be open when app has been started.
 
 ## License
 

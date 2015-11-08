@@ -23,10 +23,6 @@ Force reload the window.
 - Linux: <kbd>Ctrl</kbd> <kbd>R</kbd> or <kbd>F5</kbd>
 - Windows: <kbd>Ctrl</kbd> <kbd>R</kbd> or <kbd>F5</kbd>
 
-### Inspect element
-
-Right-click on an HTML element when DevTools is open to inspect it.
-
 
 ## Install
 
@@ -59,6 +55,12 @@ app.on('ready', function () {
 #### showDevTools
 
 If true, DevTools will be open when app has been started.
+
+
+## Related
+
+- [debug-menu](https://github.com/parro-it/debug-menu) - Chrome-like debug context-menu for Electron
+
 
 ## License
 

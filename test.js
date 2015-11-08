@@ -2,7 +2,7 @@
 const app = require('app');
 const BrowserWindow = require('browser-window');
 
-require('.')();
+require('.')({showDevTools: true});
 
 app.on('ready', () => {
 	(new BrowserWindow({show: true})).loadUrl('https://github.com');

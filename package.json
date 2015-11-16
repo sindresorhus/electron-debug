@@ -14,8 +14,7 @@
     "test": "xo"
   },
   "files": [
-    "index.js",
-    "context-menu.js"
+    "index.js"
   ],
   "keywords": [
     "electron",

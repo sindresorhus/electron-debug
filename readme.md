@@ -34,8 +34,7 @@ $ npm install --save electron-debug
 ## Usage
 
 ```js
-const app = require('app');
-const BrowserWindow = require('browser-window');
+const {app, BrowserWindow} = require('electron');
 
 require('electron-debug')({
 	showDevTools: true

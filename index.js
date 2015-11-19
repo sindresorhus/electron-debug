@@ -17,7 +17,7 @@ function refresh() {
 	const win = BrowserWindow.getFocusedWindow();
 
 	if (win) {
-		win.reloadIgnoringCache();
+		win.webContents.reloadIgnoringCache();
 	}
 }
 

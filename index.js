@@ -13,8 +13,8 @@ function devTools(win) {
 	}
 }
 
-function refresh() {
-	const win = BrowserWindow.getFocusedWindow();
+function refresh(win) {
+	win = win || BrowserWindow.getFocusedWindow();
 
 	if (win) {
 		win.webContents.reloadIgnoringCache();
@@ -38,3 +38,4 @@ module.exports = opts => {
 		localShortcut.register('F5', refresh);
 	});
 };
+

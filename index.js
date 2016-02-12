@@ -39,3 +39,5 @@ module.exports = opts => {
 	});
 };
 
+module.exports.refresh = refresh;
+module.exports.devTools = devTools;

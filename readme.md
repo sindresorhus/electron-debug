@@ -55,11 +55,10 @@ app.on('ready', () => {
 ### Default exported function
 
 ```js
-electronDebug({ showDevTools = false });
+electronDebug([showDevTools]);
 ```
 
-Install keyboard shortcuts and optionally
-activate DevTools on each created `BrowserWindow`.
+Install keyboard shortcuts and optionally activate DevTools on each created `BrowserWindow`.
 
 #### Options
 
@@ -74,7 +73,7 @@ Show DevTools on each created `BrowserWindow`.
 ### devTools
 
 ```js
-electronDebug.devTools(win = undefined);
+electronDebug.devTools([win]);
 ```
 
 Toggle DevTools for specified `BrowserWindow` instance or for focused one if not specified.
@@ -92,7 +91,7 @@ The `BrowserWindow` instance to toggle DevTools for.
 ### refresh
 
 ```js
-electronDebug.refresh(win = undefined);
+electronDebug.refresh([win]);
 ```
 
 Reload specified `BrowserWindow` instance or focused one if not specified.

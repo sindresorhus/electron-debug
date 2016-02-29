@@ -83,7 +83,7 @@ Toggle DevTools for specified `BrowserWindow` instance or for focused one if not
 * win
 
 Type: `BrowserWindow`  
-Default: `undefined`
+Default: currently focused `BrowserWindow`
 
 The `BrowserWindow` instance to toggle DevTools for.
 
@@ -101,7 +101,7 @@ Reload specified `BrowserWindow` instance or focused one if not specified.
 * win
 
 Type: `BrowserWindow`  
-Default: `undefined`
+Default: currently focused `BrowserWindow`
 
 The `BrowserWindow` instance to reload.
 

@@ -50,14 +50,61 @@ app.on('ready', () => {
 });
 ```
 
-### Options
+## API
 
-#### showDevTools
+### Default exported function
+
+```js
+electronDebug([showDevTools]);
+```
+
+Install keyboard shortcuts and optionally activate DevTools on each created `BrowserWindow`.
+
+#### Options
+
+* showDevTools
 
 Type: `boolean`  
 Default: `false`
 
-Show DevTools on startup.
+Show DevTools on each created `BrowserWindow`.
+
+
+### devTools
+
+```js
+electronDebug.devTools([win]);
+```
+
+Toggle DevTools for specified `BrowserWindow` instance or for focused one if not specified.
+
+#### Options
+
+* win
+
+Type: `BrowserWindow`  
+Default: currently focused `BrowserWindow`
+
+The `BrowserWindow` instance to toggle DevTools for.
+
+
+### refresh
+
+```js
+electronDebug.refresh([win]);
+```
+
+Reload specified `BrowserWindow` instance or focused one if not specified.
+
+#### Options
+
+* win
+
+Type: `BrowserWindow`  
+Default: currently focused `BrowserWindow`
+
+The `BrowserWindow` instance to reload.
+
 
 
 ## Related

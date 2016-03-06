@@ -68,18 +68,21 @@ Show DevTools on each created `BrowserWindow`.
 
 ### devTools([window])
 
+Toggle DevTools for the specified `BrowserWindow` instance or the focused one.
+
+#### window
+
 Type: `BrowserWindow`<br>
 Default: the focused `BrowserWindow`
-
-Toggle DevTools for the specified `BrowserWindow` instance or the focused one.
 
 ### refresh([window])
 
-Type: `BrowserWindow`<br>
-Default: the focused `BrowserWindow`
-
 Reload the specified `BrowserWindow` instance or the focused one.
 
+#### window
+
+Type: `BrowserWindow`<br>
+Default: the focused `BrowserWindow`
 
 ## Related
 

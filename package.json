@@ -19,16 +19,18 @@
   "keywords": [
     "electron",
     "debug",
+    "debugging",
     "devtools",
     "app",
-    "dev"
+    "dev",
+    "development"
   ],
   "dependencies": {
     "electron-is-dev": "^0.1.0",
     "electron-localshortcut": "^0.6.0"
   },
   "devDependencies": {
-    "electron-prebuilt": "^0.35.0",
+    "electron-prebuilt": "0.37.2",
     "xo": "*"
   },
   "xo": {

@@ -24,6 +24,7 @@
     "dev"
   ],
   "dependencies": {
+    "electron-is-dev": "^0.1.0",
     "electron-localshortcut": "^0.6.0"
   },
   "devDependencies": {

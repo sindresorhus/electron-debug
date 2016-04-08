@@ -1,6 +1,7 @@
 'use strict';
 const electron = require('electron');
 const localShortcut = require('electron-localshortcut');
+const isDev = require('electron-is-dev');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const isOSX = process.platform === 'darwin';
@@ -22,7 +23,14 @@ function refresh(win) {
 }
 
 module.exports = opts => {
-	opts = opts || {};
+	opts = Object.assign({
+		enabled: null,
+		showDevTools: false
+	}, opts);
+
+	if (opts.enabled === false || (opts.enabled === null && !isDev)) {
+		return;
+	}
 
 	app.on('browser-window-created', (e, win) => {
 		if (opts.showDevTools) {

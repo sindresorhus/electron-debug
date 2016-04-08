@@ -36,9 +36,7 @@ $ npm install --save electron-debug
 ```js
 const {app, BrowserWindow} = require('electron');
 
-require('electron-debug')({
-	showDevTools: true
-});
+require('electron-debug')({showDevTools: true});
 
 let win;
 
@@ -53,11 +51,17 @@ app.on('ready', () => {
 
 ## API
 
+Only runs when in [development](https://github.com/sindresorhus/electron-is-dev), unless overridden by the `enabled` option. So no need to guard it for production.
+
 ### electronDebug([options])
 
 Install keyboard shortcuts and optionally activate DevTools on each created `BrowserWindow`.
 
 #### options
+
+##### enabled
+
+Type: `boolean`<br>
 
 ##### showDevTools
 
@@ -84,8 +88,10 @@ Reload the specified `BrowserWindow` instance or the focused one.
 Type: `BrowserWindow`<br>
 Default: the focused `BrowserWindow`
 
+
 ## Related
 
+- [electron-is-dev](https://github.com/sindresorhus/electron-is-dev) - Check if Electron is running in development
 - [debug-menu](https://github.com/parro-it/debug-menu) - Chrome-like debug context-menu for Electron
 
 

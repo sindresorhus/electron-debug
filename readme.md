@@ -70,6 +70,15 @@ Default: `false`
 
 Show DevTools on each created `BrowserWindow`.
 
+Can take one of the `mode` values allowed by [webContents.openDevTools](https://github.com/electron/electron/blob/master/docs/api/web-contents.md#webcontentsopendevtoolsoptions) method to specify DevTools state:
+
+ * "right"
+ * "bottom"
+ * "undocked"
+ * "detach"
+ * true - last used DevTools dock state.
+
+
 ### devTools([window])
 
 Toggle DevTools for the specified `BrowserWindow` instance or the focused one.
@@ -87,6 +96,25 @@ Reload the specified `BrowserWindow` instance or the focused one.
 
 Type: `BrowserWindow`<br>
 Default: the focused `BrowserWindow`
+
+### openDevTools([window], [showDevTools])
+
+Open DevTools for the specified `BrowserWindow` instance or the focused one.
+
+#### window
+
+Type: `BrowserWindow`<br>
+Default: the focused `BrowserWindow`
+
+#### showDevTools
+
+The DevTools state to use. Can take one of the `mode` values allowed by [webContents.openDevTools](https://github.com/electron/electron/blob/master/docs/api/web-contents.md#webcontentsopendevtoolsoptions) method:
+
+ * "right"
+ * "bottom"
+ * "undocked"
+ * "detach"
+ * true - last used DevTools dock state.
 
 
 ## Related

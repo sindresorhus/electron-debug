@@ -67,7 +67,7 @@ Type: `boolean`<br>
 
 Type: `boolean` `string`<br>
 Default: `false`<br>
-Values: `'right'` `'bottom'` `'undocked'` `'detach'` `false` `true` *(last dock state)*
+Values: `'right'` `'bottom'` `'undocked'` `false` `true` *(last dock state)*
 
 Show DevTools on each created `BrowserWindow`.
 
@@ -102,7 +102,7 @@ Default: the focused `BrowserWindow`
 
 Type: `boolean` `string`<br>
 Default: `false`<br>
-Values: `'right'` `'bottom'` `'undocked'` `'detach'` `false` `true` *(last dock state)*
+Values: `'right'` `'bottom'` `'undocked'` `false` `true` *(last dock state)*
 
 Show DevTools on each created `BrowserWindow`.
 

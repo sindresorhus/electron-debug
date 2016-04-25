@@ -14,6 +14,15 @@ function devTools(win) {
 	}
 }
 
+function openDevTools(win, showDevTools) {
+	win = win || BrowserWindow.getFocusedWindow();
+
+	if (win) {
+		const mode = showDevTools !== true ? showDevTools : undefined;
+		win.webContents.openDevTools({mode});
+	}
+}
+
 function refresh(win) {
 	win = win || BrowserWindow.getFocusedWindow();
 
@@ -33,8 +42,9 @@ module.exports = opts => {
 	}
 
 	app.on('browser-window-created', (e, win) => {
+
 		if (opts.showDevTools) {
-			devTools(win);
+			openDevTools(win, opts.showDevTools);
 		}
 	});
 
@@ -49,3 +59,4 @@ module.exports = opts => {
 
 module.exports.refresh = refresh;
 module.exports.devTools = devTools;
+module.exports.openDevTools = openDevTools;

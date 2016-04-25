@@ -65,19 +65,11 @@ Type: `boolean`<br>
 
 ##### showDevTools
 
-Type: `boolean`<br>
-Default: `false`
+Type: `boolean` `string`<br>
+Default: `false`<br>
+Values: `'right'` `'bottom'` `'undocked'` `'detach'` `false` `true` *(last dock state)*
 
 Show DevTools on each created `BrowserWindow`.
-
-Can take one of the `mode` values allowed by [webContents.openDevTools](https://github.com/electron/electron/blob/master/docs/api/web-contents.md#webcontentsopendevtoolsoptions) method to specify DevTools state:
-
- * "right"
- * "bottom"
- * "undocked"
- * "detach"
- * true - last used DevTools dock state.
-
 
 ### devTools([window])
 
@@ -108,13 +100,11 @@ Default: the focused `BrowserWindow`
 
 #### showDevTools
 
-The DevTools state to use. Can take one of the `mode` values allowed by [webContents.openDevTools](https://github.com/electron/electron/blob/master/docs/api/web-contents.md#webcontentsopendevtoolsoptions) method:
+Type: `boolean` `string`<br>
+Default: `false`<br>
+Values: `'right'` `'bottom'` `'undocked'` `'detach'` `false` `true` *(last dock state)*
 
- * "right"
- * "bottom"
- * "undocked"
- * "detach"
- * true - last used DevTools dock state.
+Show DevTools on each created `BrowserWindow`.
 
 
 ## Related

@@ -18,7 +18,7 @@ function openDevTools(win, showDevTools) {
 	win = win || BrowserWindow.getFocusedWindow();
 
 	if (win) {
-		const mode = showDevTools !== true ? showDevTools : undefined;
+		const mode = showDevTools === true ? undefined : showDevTools;
 		win.webContents.openDevTools({mode});
 	}
 }
@@ -42,7 +42,6 @@ module.exports = opts => {
 	}
 
 	app.on('browser-window-created', (e, win) => {
-
 		if (opts.showDevTools) {
 			openDevTools(win, opts.showDevTools);
 		}

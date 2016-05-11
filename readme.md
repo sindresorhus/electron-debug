@@ -23,6 +23,16 @@ Force reload the window.
 - Linux: <kbd>Ctrl</kbd> <kbd>R</kbd> or <kbd>F5</kbd>
 - Windows: <kbd>Ctrl</kbd> <kbd>R</kbd> or <kbd>F5</kbd>
 
+### Activates Devtron
+
+[Devtron](http://electron.atom.io/devtron/) is the official Electron DevTools extension.
+
+Just install it in your app and we'll activate it for you.
+
+```
+$ npm install --save-dev devtron
+```
+
 
 ## Install
 

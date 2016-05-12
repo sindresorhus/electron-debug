@@ -48,6 +48,11 @@ module.exports = opts => {
 	});
 
 	app.on('ready', () => {
+		// activate devtron for the user if they have it installed
+		try {
+			BrowserWindow.addDevToolsExtension(require('devtron').path);
+		} catch (err) {}
+
 		localShortcut.register(isOSX ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);
 		localShortcut.register('F12', devTools);
 

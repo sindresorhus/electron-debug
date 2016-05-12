@@ -10,6 +10,6 @@ function load(url) {
 }
 
 electron.app.on('ready', () => {
-	load('https://github.com');
+	load(`file://${__dirname}/fixture.html`);
 	load('https://google.com');
 });

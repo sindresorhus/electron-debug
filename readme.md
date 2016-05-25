@@ -119,6 +119,7 @@ Show DevTools on each created `BrowserWindow`.
 
 ## Related
 
+- [electron-config](https://github.com/sindresorhus/electron-config) - Simple config handling for your Electron app or module
 - [electron-is-dev](https://github.com/sindresorhus/electron-is-dev) - Check if Electron is running in development
 - [debug-menu](https://github.com/parro-it/debug-menu) - Chrome-like debug context-menu for Electron
 

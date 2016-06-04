@@ -51,10 +51,7 @@ require('electron-debug')({showDevTools: true});
 let win;
 
 app.on('ready', () => {
-	win = new BrowserWindow({
-		width: 800,
-		height: 600
-	});
+	win = new BrowserWindow();
 });
 ```
 

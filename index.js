@@ -33,12 +33,12 @@ function refresh(win) {
 
 module.exports = opts => {
 	opts = Object.assign({
-		enabled: true,
+		enabled: null,
 		showDevTools: false,
 		extensions: {}
 	}, opts);
 
-	if (!opts.enabled || !isDev) {
+	if (opts.enabled === false || (opts.enabled === null && !isDev)) {
 		return;
 	}
 

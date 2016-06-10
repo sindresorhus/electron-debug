@@ -51,7 +51,9 @@ module.exports = opts => {
 	app.on('ready', () => {
 		Object.keys(opts.extensions).forEach((name) => {
 			BrowserWindow.removeDevToolsExtension(name);
-			BrowserWindow.addDevToolsExtension(opts.extensions[name]);
+			if (opts.extensions[name]) {
+				BrowserWindow.addDevToolsExtension(opts.extensions[name]);
+			}
 		});
 		localShortcut.register(isOSX ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);
 		localShortcut.register('F12', devTools);

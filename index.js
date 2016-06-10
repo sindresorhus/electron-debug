@@ -35,7 +35,7 @@ module.exports = opts => {
 	opts = Object.assign({
 		enabled: true,
 		showDevTools: false,
-		extensions: {},
+		extensions: {}
 	}, opts);
 
 	if (!opts.enabled || !isDev) {
@@ -49,7 +49,7 @@ module.exports = opts => {
 	});
 
 	app.on('ready', () => {
-		Object.keys(opts.extensions).forEach((name) => {
+		Object.keys(opts.extensions).forEach(name => {
 			BrowserWindow.removeDevToolsExtension(name);
 			if (opts.extensions[name]) {
 				BrowserWindow.addDevToolsExtension(opts.extensions[name]);

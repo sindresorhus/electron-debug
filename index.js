@@ -34,7 +34,8 @@ function refresh(win) {
 module.exports = opts => {
 	opts = Object.assign({
 		enabled: null,
-		showDevTools: false
+		showDevTools: false,
+		extensions: {}
 	}, opts);
 
 	if (opts.enabled === false || (opts.enabled === null && !isDev)) {
@@ -48,11 +49,14 @@ module.exports = opts => {
 	});
 
 	app.on('ready', () => {
-		// activate devtron for the user if they have it installed
-		try {
-			BrowserWindow.addDevToolsExtension(require('devtron').path);
-		} catch (err) {}
-
+		if (isDev) {
+			Object.keys(opts.extensions).forEach(name => {
+				BrowserWindow.removeDevToolsExtension(name);
+				if (opts.extensions[name]) {
+					BrowserWindow.addDevToolsExtension(opts.extensions[name]);
+				}
+			});
+		}
 		localShortcut.register(isOSX ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);
 		localShortcut.register('F12', devTools);
 

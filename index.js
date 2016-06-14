@@ -4,7 +4,7 @@ const localShortcut = require('electron-localshortcut');
 const isDev = require('electron-is-dev');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
-const isOSX = process.platform === 'darwin';
+const isMacOS = process.platform === 'darwin';
 
 function devTools(win) {
 	win = win || BrowserWindow.getFocusedWindow();
@@ -53,7 +53,7 @@ module.exports = opts => {
 			BrowserWindow.addDevToolsExtension(require('devtron').path);
 		} catch (err) {}
 
-		localShortcut.register(isOSX ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);
+		localShortcut.register(isMacOS ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);
 		localShortcut.register('F12', devTools);
 
 		localShortcut.register('CmdOrCtrl+R', refresh);

@@ -11,7 +11,7 @@ Ideas for more debug features [welcome!](https://github.com/sindresorhus/electro
 
 Toggle DevTools.
 
-- OS X: <kbd>Cmd</kbd> <kbd>Alt</kbd> <kbd>I</kbd> or <kbd>F12</kbd>
+- macOS: <kbd>Cmd</kbd> <kbd>Alt</kbd> <kbd>I</kbd> or <kbd>F12</kbd>
 - Linux: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>I</kbd> or <kbd>F12</kbd>
 - Windows: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>I</kbd> or <kbd>F12</kbd>
 
@@ -19,7 +19,7 @@ Toggle DevTools.
 
 Force reload the window.
 
-- OS X: <kbd>Cmd</kbd> <kbd>R</kbd> or <kbd>F5</kbd>
+- macOS: <kbd>Cmd</kbd> <kbd>R</kbd> or <kbd>F5</kbd>
 - Linux: <kbd>Ctrl</kbd> <kbd>R</kbd> or <kbd>F5</kbd>
 - Windows: <kbd>Ctrl</kbd> <kbd>R</kbd> or <kbd>F5</kbd>
 

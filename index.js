@@ -48,9 +48,15 @@ module.exports = opts => {
 	});
 
 	app.on('ready', () => {
-		// activate devtron for the user if they have it installed
+		// activate devtron for the user if they have it installed and it's not already added
 		try {
-			BrowserWindow.addDevToolsExtension(require('devtron').path);
+			const devtronAlreadyAdded =
+				BrowserWindow.getDevToolsExtensions &&
+				BrowserWindow.getDevToolsExtensions().hasOwnProperty('devtron');
+
+			if (!devtronAlreadyAdded) {
+				BrowserWindow.addDevToolsExtension(require('devtron').path);
+			}
 		} catch (err) {}
 
 		localShortcut.register(isMacOS ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);

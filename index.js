@@ -2,6 +2,7 @@
 const electron = require('electron');
 const localShortcut = require('electron-localshortcut');
 const isDev = require('electron-is-dev');
+
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const isMacOS = process.platform === 'darwin';
@@ -50,9 +51,8 @@ module.exports = opts => {
 	app.on('ready', () => {
 		// activate devtron for the user if they have it installed and it's not already added
 		try {
-			const devtronAlreadyAdded =
-				BrowserWindow.getDevToolsExtensions &&
-				BrowserWindow.getDevToolsExtensions().hasOwnProperty('devtron');
+			const devtronAlreadyAdded = BrowserWindow.getDevToolsExtensions &&
+				{}.hasOwnProperty.call(BrowserWindow.getDevToolsExtensions(), 'devtron');
 
 			if (!devtronAlreadyAdded) {
 				BrowserWindow.addDevToolsExtension(require('devtron').path);

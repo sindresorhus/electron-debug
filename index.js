@@ -39,9 +39,9 @@ function inspectElements() {
 		if (win.webContents.isDevToolsOpened()) {
 			win.devToolsWebContents.executeJavaScript('DevToolsAPI.enterInspectElementMode()');
 		} else {
-			win.webContents.on('devtools-opened', function () {
+			win.webContents.on('devtools-opened', () => {
 				win.devToolsWebContents.executeJavaScript('DevToolsAPI.enterInspectElementMode()');
-			})
+			});
 			win.openDevTools();
 		}
 	}

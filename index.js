@@ -32,6 +32,21 @@ function refresh(win) {
 	}
 }
 
+function inspectElements() {
+	const win = BrowserWindow.getFocusedWindow();
+
+	if (win) {
+		if (win.webContents.isDevToolsOpened()) {
+			win.devToolsWebContents.executeJavaScript('DevToolsAPI.enterInspectElementMode()');
+		} else {
+			win.webContents.on('devtools-opened', function () {
+				win.devToolsWebContents.executeJavaScript('DevToolsAPI.enterInspectElementMode()');
+			})
+			win.openDevTools();
+		}
+	}
+}
+
 module.exports = opts => {
 	opts = Object.assign({
 		enabled: null,
@@ -58,6 +73,13 @@ module.exports = opts => {
 				BrowserWindow.addDevToolsExtension(require('devtron').path);
 			}
 		} catch (err) {}
+
+		if (isMacOS) {
+			localShortcut.register('Cmd+Shift+C', inspectElements);
+			localShortcut.register('Cmd+Alt+C', inspectElements);
+		} else {
+			localShortcut.register('Ctrl+Shift+C', inspectElements);
+		}
 
 		localShortcut.register(isMacOS ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);
 		localShortcut.register('F12', devTools);

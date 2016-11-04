@@ -74,13 +74,7 @@ module.exports = opts => {
 			}
 		} catch (err) {}
 
-		if (isMacOS) {
-			localShortcut.register('Cmd+Shift+C', inspectElements);
-			localShortcut.register('Cmd+Alt+C', inspectElements);
-		} else {
-			localShortcut.register('Ctrl+Shift+C', inspectElements);
-		}
-
+		localShortcut.register('CmdOrCtrl+Shift+C', inspectElements);
 		localShortcut.register(isMacOS ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);
 		localShortcut.register('F12', devTools);
 

@@ -36,7 +36,7 @@ function inspectElements() {
 	const win = BrowserWindow.getFocusedWindow();
 	const inspect = () => {
 		win.devToolsWebContents.executeJavaScript('DevToolsAPI.enterInspectElementMode()');
-	}
+	};
 
 	if (win) {
 		if (win.webContents.isDevToolsOpened()) {

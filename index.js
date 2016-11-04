@@ -34,14 +34,15 @@ function refresh(win) {
 
 function inspectElements() {
 	const win = BrowserWindow.getFocusedWindow();
+	const inspect = () => {
+		win.devToolsWebContents.executeJavaScript('DevToolsAPI.enterInspectElementMode()');
+	}
 
 	if (win) {
 		if (win.webContents.isDevToolsOpened()) {
-			win.devToolsWebContents.executeJavaScript('DevToolsAPI.enterInspectElementMode()');
+			inspect();
 		} else {
-			win.webContents.on('devtools-opened', () => {
-				win.devToolsWebContents.executeJavaScript('DevToolsAPI.enterInspectElementMode()');
-			});
+			win.webContents.on('devtools-opened', inspect);
 			win.openDevTools();
 		}
 	}

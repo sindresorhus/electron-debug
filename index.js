@@ -32,6 +32,22 @@ function refresh(win) {
 	}
 }
 
+function inspectElements() {
+	const win = BrowserWindow.getFocusedWindow();
+	const inspect = () => {
+		win.devToolsWebContents.executeJavaScript('DevToolsAPI.enterInspectElementMode()');
+	};
+
+	if (win) {
+		if (win.webContents.isDevToolsOpened()) {
+			inspect();
+		} else {
+			win.webContents.on('devtools-opened', inspect);
+			win.openDevTools();
+		}
+	}
+}
+
 module.exports = opts => {
 	opts = Object.assign({
 		enabled: null,
@@ -59,6 +75,7 @@ module.exports = opts => {
 			}
 		} catch (err) {}
 
+		localShortcut.register('CmdOrCtrl+Shift+C', inspectElements);
 		localShortcut.register(isMacOS ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);
 		localShortcut.register('F12', devTools);
 

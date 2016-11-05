@@ -23,6 +23,14 @@ Force reload the window.
 - Linux: <kbd>Ctrl</kbd> <kbd>R</kbd> or <kbd>F5</kbd>
 - Windows: <kbd>Ctrl</kbd> <kbd>R</kbd> or <kbd>F5</kbd>
 
+### Element Inspector
+
+Open DevTools and focus the Element Inspector tool.
+
+- macOS: <kbd>Cmd</kbd> <kbd>Shift</kbd> <kbd>C</kbd>
+- Linux: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>C</kbd>
+- Windows: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>C</kbd>
+
 ### Activates Devtron
 
 [Devtron](http://electron.atom.io/devtron/) is the official Electron DevTools extension.

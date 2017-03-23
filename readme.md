@@ -35,9 +35,9 @@ Open DevTools and focus the Element Inspector tool.
 
 Capture screenshot of the window.
 
-- macOS: <kbd>Cmd</kbd> <kbd>Shift</kbd> <kbd>S</kbd>
-- Linux: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>S</kbd>
-- Windows: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>S</kbd>
+- macOS: <kbd>Cmd</kbd> <kbd>Alt</kbd> <kbd>3</kbd>
+- Linux: <kbd>Ctrl</kbd> <kbd>PrintScreen</kbd>
+- Windows: <kbd>Ctrl</kbd> <kbd>PrintScreen</kbd>
 
 ### Activates Devtron
 

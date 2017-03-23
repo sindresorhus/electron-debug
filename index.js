@@ -7,6 +7,7 @@ const isDev = require('electron-is-dev');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const dialog = electron.dialog;
+const clipboard = electron.clipboard;
 const isMacOS = process.platform === 'darwin';
 
 function devTools(win) {
@@ -53,20 +54,28 @@ function inspectElements() {
 function screenshot(win) {
 	win = win || BrowserWindow.getFocusedWindow();
 	win.capturePage(image => {
-		dialog.showSaveDialog(win, {filters: [{name: 'Images', extensions: ['jpg', 'png']}]}, filename => {
-			const filetype = filename.split('.').pop();
-			let imageBuffer;
+		dialog.showMessageBox(win, {type: 'question', buttons: ['Cancel', 'Copy to clipboard', 'Save to file'], message: 'What would you like to do with this image?', cancelId: 0}, response => {
+			if (response === 1) {
+				clipboard.writeImage(image);
+			} else if (response === 2) {
+				dialog.showSaveDialog(win, {filters: [{name: 'Images', extensions: ['jpg', 'png']}]}, filename => {
+					if (filename) {
+						const filetype = filename.split('.').pop();
+						let imageBuffer;
 
-			if (filetype === 'png') {
-				imageBuffer = image.toPNG();
-			} else if (filetype === 'jpg') {
-				imageBuffer = image.toJPEG(100);
-			}
+						if (filetype === 'png') {
+							imageBuffer = image.toPNG();
+						} else if (filetype === 'jpg') {
+							imageBuffer = image.toJPEG(100);
+						}
 
-			if (imageBuffer) {
-				fs.writeFile(filename, imageBuffer, err => {
-					if (err) {
-						throw err;
+						if (imageBuffer) {
+							fs.writeFile(filename, imageBuffer, err => {
+								if (err) {
+									throw err;
+								}
+							});
+						}
 					}
 				});
 			}
@@ -108,7 +117,7 @@ module.exports = opts => {
 		localShortcut.register('CmdOrCtrl+R', refresh);
 		localShortcut.register('F5', refresh);
 
-		localShortcut.register('CmdOrCtrl+Shift+S', screenshot);
+		localShortcut.register(isMacOS ? 'Cmd+Alt+3' : 'Ctrl+PrintScreen', screenshot);
 	});
 };
 

@@ -1,10 +1,12 @@
 'use strict';
 const electron = require('electron');
+const fs = require('fs');
 const localShortcut = require('electron-localshortcut');
 const isDev = require('electron-is-dev');
 
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const dialog = electron.dialog;
 const isMacOS = process.platform === 'darwin';
 
 function devTools(win) {
@@ -48,6 +50,30 @@ function inspectElements() {
 	}
 }
 
+function screenshot(win) {
+	win = win || BrowserWindow.getFocusedWindow();
+	win.capturePage(image => {
+		dialog.showSaveDialog(win, {filters: [{name: 'Images', extensions: ['jpg', 'png']}]}, filename => {
+			const filetype = filename.split('.').pop();
+			let imageBuffer;
+
+			if (filetype === 'png') {
+				imageBuffer = image.toPNG();
+			} else if (filetype === 'jpg') {
+				imageBuffer = image.toJPEG(100);
+			}
+
+			if (imageBuffer) {
+				fs.writeFile(filename, imageBuffer, err => {
+					if (err) {
+						throw err;
+					}
+				});
+			}
+		});
+	});
+}
+
 module.exports = opts => {
 	opts = Object.assign({
 		enabled: null,
@@ -81,6 +107,8 @@ module.exports = opts => {
 
 		localShortcut.register('CmdOrCtrl+R', refresh);
 		localShortcut.register('F5', refresh);
+
+		localShortcut.register('CmdOrCtrl+Shift+S', screenshot);
 	});
 };
 

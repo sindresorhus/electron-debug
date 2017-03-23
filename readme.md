@@ -31,6 +31,14 @@ Open DevTools and focus the Element Inspector tool.
 - Linux: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>C</kbd>
 - Windows: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>C</kbd>
 
+### Capture Screenshot
+
+Capture screenshot of the window.
+
+- macOS: <kbd>Cmd</kbd> <kbd>Shift</kbd> <kbd>S</kbd>
+- Linux: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>S</kbd>
+- Windows: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>S</kbd>
+
 ### Activates Devtron
 
 [Devtron](http://electron.atom.io/devtron/) is the official Electron DevTools extension.

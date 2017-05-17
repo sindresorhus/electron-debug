@@ -76,7 +76,7 @@ Install keyboard shortcuts and optionally activate DevTools on each created `Bro
 
 ##### enabled
 
-Type: `boolean`<br>
+Type: `boolean`
 
 ##### showDevTools
 

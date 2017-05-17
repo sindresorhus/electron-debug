@@ -65,7 +65,7 @@ module.exports = opts => {
 	});
 
 	app.on('ready', () => {
-		// activate devtron for the user if they have it installed and it's not already added
+		// Activate devtron for the user if they have it installed and it's not already added
 		try {
 			const devtronAlreadyAdded = BrowserWindow.getDevToolsExtensions &&
 				{}.hasOwnProperty.call(BrowserWindow.getDevToolsExtensions(), 'devtron');

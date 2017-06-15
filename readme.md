@@ -124,7 +124,7 @@ Show DevTools on each created `BrowserWindow`.
 
 ## Related
 
-- [electron-config](https://github.com/sindresorhus/electron-config) - Simple config handling for your Electron app or module
+- [electron-store](https://github.com/sindresorhus/electron-store) - Save and load data like user preferences, app state, cache, etc
 - [electron-context-menu](https://github.com/sindresorhus/electron-context-menu) - Context menu for your Electron app
 - [electron-dl](https://github.com/sindresorhus/electron-dl) - Simplified file downloads for your Electron app
 - [electron-unhandled](https://github.com/sindresorhus/electron-unhandled) - Catch unhandled errors and promise rejections in your Electron app

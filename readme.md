@@ -45,7 +45,7 @@ $ npm install --save-dev devtron
 ## Install
 
 ```
-$ npm install --save electron-debug
+$ npm install electron-debug
 ```
 
 
@@ -82,7 +82,7 @@ Type: `boolean`
 
 Type: `boolean` `string`<br>
 Default: `false`<br>
-Values: `'right'` `'bottom'` `'undocked'` `false` `true` *(last dock state)*
+Values: `'right'` `'bottom'` `'undocked'` `false` `true` *(Last dock state)*
 
 Show DevTools on each created `BrowserWindow`.
 
@@ -93,7 +93,7 @@ Toggle DevTools for the specified `BrowserWindow` instance or the focused one.
 #### window
 
 Type: `BrowserWindow`<br>
-Default: the focused `BrowserWindow`
+Default: The focused `BrowserWindow`
 
 ### refresh([window])
 
@@ -102,7 +102,7 @@ Reload the specified `BrowserWindow` instance or the focused one.
 #### window
 
 Type: `BrowserWindow`<br>
-Default: the focused `BrowserWindow`
+Default: The focused `BrowserWindow`
 
 ### openDevTools([window], [showDevTools])
 
@@ -111,7 +111,7 @@ Open DevTools for the specified `BrowserWindow` instance or the focused one.
 #### window
 
 Type: `BrowserWindow`<br>
-Default: the focused `BrowserWindow`
+Default: The focused `BrowserWindow`
 
 #### showDevTools
 

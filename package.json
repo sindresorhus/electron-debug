@@ -1,43 +1,43 @@
 {
-	"name": "electron-debug",
-	"version": "1.3.0",
-	"description": "Adds useful debug features to your Electron app",
-	"license": "MIT",
-	"repository": "sindresorhus/electron-debug",
-	"author": {
-		"name": "Sindre Sorhus",
-		"email": "sindresorhus@gmail.com",
-		"url": "sindresorhus.com"
-	},
-	"scripts": {
-		"start": "electron test.js",
-		"test": "xo"
-	},
-	"files": [
-		"index.js"
-	],
-	"keywords": [
-		"electron",
-		"debug",
-		"debugging",
-		"devtools",
-		"app",
-		"dev",
-		"development"
-	],
-	"dependencies": {
-		"electron-is-dev": "^0.3.0",
-		"electron-localshortcut": "^3.0.0"
-	},
-	"devDependencies": {
-		"devtron": "^1.1.0",
-		"electron": "^1.6.12",
-		"xo": "*"
-	},
-	"xo": {
-		"envs": [
-			"node",
-			"browser"
-		]
-	}
+  "name": "electron-debug",
+  "version": "1.4.0",
+  "description": "Adds useful debug features to your Electron app",
+  "license": "MIT",
+  "repository": "sindresorhus/electron-debug",
+  "author": {
+    "name": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "sindresorhus.com"
+  },
+  "scripts": {
+    "start": "electron test.js",
+    "test": "xo"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "electron",
+    "debug",
+    "debugging",
+    "devtools",
+    "app",
+    "dev",
+    "development"
+  ],
+  "dependencies": {
+    "electron-is-dev": "^0.3.0",
+    "electron-localshortcut": "^3.0.0"
+  },
+  "devDependencies": {
+    "devtron": "^1.1.0",
+    "electron": "^1.6.12",
+    "xo": "*"
+  },
+  "xo": {
+    "envs": [
+      "node",
+      "browser"
+    ]
+  }
 }

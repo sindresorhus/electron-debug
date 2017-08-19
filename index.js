@@ -9,10 +9,9 @@ const isMacOS = process.platform === 'darwin';
 
 function devTools(win) {
 	win = win || BrowserWindow.getFocusedWindow();
+	var toggleStatus = win ? win.webContents.isDevToolsOpened() : undefined;
 
-	if (win) {
-		win.toggleDevTools();
-	}
+	openDevTools(win, toggleStatus);
 }
 
 function openDevTools(win, showDevTools) {
@@ -48,9 +47,31 @@ function inspectElements() {
 	}
 }
 
+function installDevtron() {
+	// Activate devtron for the user if they have it installed and it's not already added
+	try {
+		const devtronAlreadyAdded = BrowserWindow.getDevToolsExtensions &&
+			{}.hasOwnProperty.call(BrowserWindow.getDevToolsExtensions(), 'devtron');
+
+		if (!devtronAlreadyAdded) {
+			BrowserWindow.addDevToolsExtension(require('devtron').path);
+		}
+	} catch (err) {
+	}
+
+	//Add standard shortcuts for Chrome interactions
+	localShortcut.register('CmdOrCtrl+Shift+C', inspectElements);
+	localShortcut.register(isMacOS ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);
+	localShortcut.register('F12', devTools);
+
+	localShortcut.register('CmdOrCtrl+R', refresh);
+	localShortcut.register('F5', refresh);
+}
+
 module.exports = opts => {
 	opts = Object.assign({
 		enabled: null,
+		initWindow: undefined,
 		showDevTools: false
 	}, opts);
 
@@ -58,30 +79,24 @@ module.exports = opts => {
 		return;
 	}
 
-	app.on('browser-window-created', (e, win) => {
-		if (opts.showDevTools) {
-			openDevTools(win, opts.showDevTools);
+	//If the app is already "ready," then install immediately, otherwise wait for the app.
+	if (app.isReady()) {
+		installDevtron();
+	} else {
+		app.on('ready', installDevtron);
+	}
+
+	//If we want to showDevTools, toggle immediately if initWindow is defined...
+	if (opts.showDevTools) {
+		if (opts.initWindow) {
+			openDevTools(opts.initWindow, opts.showDevTools);
+		} else {
+			//... otherwise wait for a window to be created.
+			app.on('browser-window-created', (e, win) => {
+				openDevTools(win, opts.showDevTools);
+			});
 		}
-	});
-
-	app.on('ready', () => {
-		// Activate devtron for the user if they have it installed and it's not already added
-		try {
-			const devtronAlreadyAdded = BrowserWindow.getDevToolsExtensions &&
-				{}.hasOwnProperty.call(BrowserWindow.getDevToolsExtensions(), 'devtron');
-
-			if (!devtronAlreadyAdded) {
-				BrowserWindow.addDevToolsExtension(require('devtron').path);
-			}
-		} catch (err) {}
-
-		localShortcut.register('CmdOrCtrl+Shift+C', inspectElements);
-		localShortcut.register(isMacOS ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);
-		localShortcut.register('F12', devTools);
-
-		localShortcut.register('CmdOrCtrl+R', refresh);
-		localShortcut.register('F5', refresh);
-	});
+	}
 };
 
 module.exports.refresh = refresh;

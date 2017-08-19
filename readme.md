@@ -78,6 +78,13 @@ Install keyboard shortcuts and optionally activate DevTools on each created `Bro
 
 Type: `boolean`
 
+##### initWindow
+
+Type: BrowserWindow
+default: undefined
+
+If supplied, initial `showDevTools` will operate on the window instead of waiting for a window to open. This is useful if your `BrowserWindow` opens prior to calling this module.
+
 ##### showDevTools
 
 Type: `boolean` `string`<br>

@@ -1,6 +1,6 @@
 # electron-debug
 
-> Adds useful debug features to your [Electron](http://electron.atom.io) app
+> Adds useful debug features to your [Electron](https://electronjs.org) app
 
 Ideas for more debug features [welcome!](https://github.com/sindresorhus/electron-debug/issues/new)
 
@@ -33,7 +33,7 @@ Open DevTools and focus the Element Inspector tool.
 
 ### Activates Devtron
 
-[Devtron](http://electron.atom.io/devtron/) is the official Electron DevTools extension.
+[Devtron](https://electronjs.org/devtron) is the official Electron DevTools extension.
 
 Just install it in your app and we'll activate it for you.
 

@@ -48,6 +48,19 @@ function inspectElements() {
 	}
 }
 
+const addExtensionIfInstalled = (name, getPath) => {
+	const isExtensionInstalled = name => {
+		return BrowserWindow.getDevToolsExtensions &&
+			{}.hasOwnProperty.call(BrowserWindow.getDevToolsExtensions(), name);
+	};
+
+	try {
+		if (!isExtensionInstalled(name)) {
+			BrowserWindow.addDevToolsExtension(getPath(name));
+		}
+	} catch (err) {}
+};
+
 module.exports = opts => {
 	opts = Object.assign({
 		enabled: null,
@@ -65,15 +78,10 @@ module.exports = opts => {
 	});
 
 	app.on('ready', () => {
-		// Activate devtron for the user if they have it installed and it's not already added
-		try {
-			const devtronAlreadyAdded = BrowserWindow.getDevToolsExtensions &&
-				{}.hasOwnProperty.call(BrowserWindow.getDevToolsExtensions(), 'devtron');
-
-			if (!devtronAlreadyAdded) {
-				BrowserWindow.addDevToolsExtension(require('devtron').path);
-			}
-		} catch (err) {}
+		addExtensionIfInstalled('devtron', name => require(name).path);
+		// TODO: Use this when https://github.com/firejune/electron-react-devtools/pull/6 is out
+		// addExtensionIfInstalled('electron-react-devtools', name => require(name).path);
+		addExtensionIfInstalled('electron-react-devtools', name => require('path').dirname(require.resolve(name)));
 
 		localShortcut.register('CmdOrCtrl+Shift+C', inspectElements);
 		localShortcut.register(isMacOS ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);

@@ -31,15 +31,12 @@ Open DevTools and focus the Element Inspector tool.
 - Linux: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>C</kbd>
 - Windows: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>C</kbd>
 
-### Activates Devtron
+### Activates DevTools extensions
 
-[Devtron](https://electronjs.org/devtron) is the official Electron DevTools extension.
+Just install any of these extension and they'll be activated for you:
 
-Just install it in your app and we'll activate it for you.
-
-```
-$ npm install --save-dev devtron
-```
+- [devtron](https://electronjs.org/devtron) - The official Electron DevTools extension
+- [electron-react-devtools](https://github.com/firejune/electron-react-devtools) - React DevTools extension for Electron
 
 
 ## Install

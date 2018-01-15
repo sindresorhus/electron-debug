@@ -48,17 +48,37 @@ function inspectElements() {
 	}
 }
 
-const addExtensionIfInstalled = (name, getPath) => {
-	const isExtensionInstalled = name => {
-		return BrowserWindow.getDevToolsExtensions &&
-			{}.hasOwnProperty.call(BrowserWindow.getDevToolsExtensions(), name);
-	};
+const isExtensionInstalled = name => {
+	return BrowserWindow.getDevToolsExtensions &&
+		{}.hasOwnProperty.call(BrowserWindow.getDevToolsExtensions(), name);
+};
 
+const addDevtron = () => {
 	try {
-		if (!isExtensionInstalled(name)) {
-			BrowserWindow.addDevToolsExtension(getPath(name));
+		if (!isExtensionInstalled('devtron')) {
+			const devtron = require('devtron');
+
+			if (devtron) {
+				BrowserWindow.addDevToolsExtension(devtron.path);
+			}
 		}
-	} catch (err) {}
+	} catch (err) {
+		console.error(`Can't verify if devtron is already installed: ${err}`);
+	}
+};
+
+const addReactDevTools = () => {
+	try {
+		if (!isExtensionInstalled('electron-react-devtools')) {
+			const electronReactDevTools = require('electron-react-devtools');
+
+			if (electronReactDevTools) {
+				BrowserWindow.addDevToolsExtension(electronReactDevTools.path);
+			}
+		}
+	} catch (err) {
+		console.error(`Can't verify if react-dev-tools is already installed: ${err}`);
+	}
 };
 
 module.exports = opts => {
@@ -78,10 +98,8 @@ module.exports = opts => {
 	});
 
 	app.on('ready', () => {
-		addExtensionIfInstalled('devtron', name => require(name).path);
-		// TODO: Use this when https://github.com/firejune/electron-react-devtools/pull/6 is out
-		// addExtensionIfInstalled('electron-react-devtools', name => require(name).path);
-		addExtensionIfInstalled('electron-react-devtools', name => require('path').dirname(require.resolve(name)));
+		addDevtron();
+		addReactDevTools();
 
 		localShortcut.register('CmdOrCtrl+Shift+C', inspectElements);
 		localShortcut.register(isMacOS ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);

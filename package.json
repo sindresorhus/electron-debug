@@ -32,7 +32,7 @@
 	"devDependencies": {
 		"devtron": "^1.1.0",
 		"electron": "^1.6.12",
-		"electron-react-devtools": "^0.5.2",
+		"electron-react-devtools": "^0.5.3",
 		"xo": "*"
 	},
 	"xo": {

@@ -3,8 +3,7 @@ const electron = require('electron');
 const localShortcut = require('electron-localshortcut');
 const isDev = require('electron-is-dev');
 
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
+const {app, BrowserWindow} = electron;
 const isMacOS = process.platform === 'darwin';
 
 function devTools(win) {
@@ -79,9 +78,7 @@ module.exports = opts => {
 
 	app.on('ready', () => {
 		addExtensionIfInstalled('devtron', name => require(name).path);
-		// TODO: Use this when https://github.com/firejune/electron-react-devtools/pull/6 is out
-		// addExtensionIfInstalled('electron-react-devtools', name => require(name).path);
-		addExtensionIfInstalled('electron-react-devtools', name => require('path').dirname(require.resolve(name)));
+		addExtensionIfInstalled('electron-react-devtools', name => require(name).path);
 
 		localShortcut.register('CmdOrCtrl+Shift+C', inspectElements);
 		localShortcut.register(isMacOS ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);

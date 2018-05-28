@@ -6,20 +6,34 @@ const isDev = require('electron-is-dev');
 const {app, BrowserWindow} = electron;
 const isMacOS = process.platform === 'darwin';
 
+const devToolsOptions = {};
+
+function toggleDevTools(win) {
+	win = win || BrowserWindow.getFocusedWindow();
+
+	if (win) {
+		const contents = win.webContents;
+		if (contents.isDevToolsOpened()) {
+			contents.closeDevTools();
+		} else {
+			contents.openDevTools(devToolsOptions);
+		}
+	}
+}
+
 function devTools(win) {
 	win = win || BrowserWindow.getFocusedWindow();
 
 	if (win) {
-		win.toggleDevTools();
+		toggleDevTools(win);
 	}
 }
 
-function openDevTools(win, showDevTools) {
+function openDevTools(win) {
 	win = win || BrowserWindow.getFocusedWindow();
 
 	if (win) {
-		const mode = showDevTools === true ? undefined : showDevTools;
-		win.webContents.openDevTools({mode});
+		win.webContents.openDevTools(devToolsOptions);
 	}
 }
 
@@ -41,7 +55,7 @@ function inspectElements() {
 		if (win.webContents.isDevToolsOpened()) {
 			inspect();
 		} else {
-			win.webContents.on('devtools-opened', inspect);
+			win.webContents.once('devtools-opened', inspect);
 			win.openDevTools();
 		}
 	}
@@ -63,11 +77,16 @@ const addExtensionIfInstalled = (name, getPath) => {
 module.exports = opts => {
 	opts = Object.assign({
 		enabled: null,
-		showDevTools: false
+		showDevTools: false,
+		devToolsMode: 'undocked'
 	}, opts);
 
 	if (opts.enabled === false || (opts.enabled === null && !isDev)) {
 		return;
+	}
+
+	if (opts.devToolsMode !== 'previous') {
+		devToolsOptions.mode = opts.devToolsMode;
 	}
 
 	app.on('browser-window-created', (event, win) => {

@@ -77,11 +77,18 @@ Type: `boolean`
 
 ##### showDevTools
 
-Type: `boolean` `string`<br>
-Default: `false`<br>
-Values: `'right'` `'bottom'` `'undocked'` `false` `true` *(Last dock state)*
+Type: `boolean`<br>
+Default: `false`
 
 Show DevTools on each created `BrowserWindow`.
+
+##### devToolsMode
+
+Type: `string`<br>
+Default: `undocked`<br>
+Values: `undocked` `right` `bottom` `previous`
+
+The dock state to open DevTools in.
 
 ### devTools([window])
 
@@ -101,7 +108,7 @@ Reload the specified `BrowserWindow` instance or the focused one.
 Type: `BrowserWindow`<br>
 Default: The focused `BrowserWindow`
 
-### openDevTools([window], [showDevTools])
+### openDevTools([window])
 
 Open DevTools for the specified `BrowserWindow` instance or the focused one.
 
@@ -109,14 +116,6 @@ Open DevTools for the specified `BrowserWindow` instance or the focused one.
 
 Type: `BrowserWindow`<br>
 Default: The focused `BrowserWindow`
-
-#### showDevTools
-
-Type: `boolean` `string`<br>
-Default: `false`<br>
-Values: `'right'` `'bottom'` `'undocked'` `false` `true` *(last dock state)*
-
-Show DevTools on each created `BrowserWindow`.
 
 
 ## Related

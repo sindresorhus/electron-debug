@@ -51,7 +51,7 @@ $ npm install electron-debug
 ```js
 const {app, BrowserWindow} = require('electron');
 
-require('electron-debug')({showDevTools: true});
+require('electron-debug')();
 
 let win;
 
@@ -78,7 +78,7 @@ Type: `boolean`
 ##### showDevTools
 
 Type: `boolean`<br>
-Default: `false`
+Default: `true`
 
 Show DevTools on each created `BrowserWindow`.
 

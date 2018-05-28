@@ -69,7 +69,7 @@ const addExtensionIfInstalled = (name, getPath) => {
 module.exports = opts => {
 	opts = Object.assign({
 		enabled: null,
-		showDevTools: false,
+		showDevTools: true,
 		devToolsMode: 'undocked'
 	}, opts);
 

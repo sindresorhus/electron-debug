@@ -2,8 +2,6 @@
 
 > Adds useful debug features to your [Electron](https://electronjs.org) app
 
-Ideas for more debug features [welcome!](https://github.com/sindresorhus/electron-debug/issues/new)
-
 
 ## Features
 
@@ -44,6 +42,8 @@ Just install any of these extension and they'll be activated for you:
 ```
 $ npm install electron-debug
 ```
+
+*Requires Electron 2.0.0 or later.*
 
 
 ## Usage

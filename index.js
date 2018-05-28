@@ -8,38 +8,30 @@ const isMacOS = process.platform === 'darwin';
 
 const devToolsOptions = {};
 
-function toggleDevTools(win) {
-	win = win || BrowserWindow.getFocusedWindow();
-
+function toggleDevTools(win = BrowserWindow.getFocusedWindow()) {
 	if (win) {
-		const contents = win.webContents;
-		if (contents.isDevToolsOpened()) {
-			contents.closeDevTools();
+		const {webContents} = win;
+		if (webContents.isDevToolsOpened()) {
+			webContents.closeDevTools();
 		} else {
-			contents.openDevTools(devToolsOptions);
+			webContents.openDevTools(devToolsOptions);
 		}
 	}
 }
 
-function devTools(win) {
-	win = win || BrowserWindow.getFocusedWindow();
-
+function devTools(win = BrowserWindow.getFocusedWindow()) {
 	if (win) {
 		toggleDevTools(win);
 	}
 }
 
-function openDevTools(win) {
-	win = win || BrowserWindow.getFocusedWindow();
-
+function openDevTools(win = BrowserWindow.getFocusedWindow()) {
 	if (win) {
 		win.webContents.openDevTools(devToolsOptions);
 	}
 }
 
-function refresh(win) {
-	win = win || BrowserWindow.getFocusedWindow();
-
+function refresh(win = BrowserWindow.getFocusedWindow()) {
 	if (win) {
 		win.webContents.reloadIgnoringCache();
 	}
@@ -71,7 +63,7 @@ const addExtensionIfInstalled = (name, getPath) => {
 		if (!isExtensionInstalled(name)) {
 			BrowserWindow.addDevToolsExtension(getPath(name));
 		}
-	} catch (err) {}
+	} catch (_) {}
 };
 
 module.exports = opts => {

@@ -70,9 +70,19 @@ module.exports = opts => {
 		return;
 	}
 
-	app.on('browser-window-created', (e, win) => {
+	app.on('browser-window-created', (event, win) => {
 		if (opts.showDevTools) {
-			openDevTools(win, opts.showDevTools);
+			win.webContents.once('devtools-opened', () => {
+				// Workaround for https://github.com/electron/electron/issues/13095
+				setImmediate(() => {
+					win.focus();
+				});
+			});
+
+			/// Workaround for https://github.com/electron/electron/issues/12438
+			win.webContents.once('dom-ready', () => {
+				openDevTools(win, opts.showDevTools);
+			});
 		}
 	});
 

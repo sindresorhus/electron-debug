@@ -45,6 +45,10 @@ $ npm install electron-debug
 
 *Requires Electron 2.0.0 or later.*
 
+<a href="https://www.patreon.com/sindresorhus">
+	<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
+</a>
+
 
 ## Usage
 
@@ -120,11 +124,13 @@ Default: The focused `BrowserWindow`
 
 ## Related
 
+- [electron-util](https://github.com/sindresorhus/electron-util) - Useful utilities for developing Electron apps and modules
 - [electron-store](https://github.com/sindresorhus/electron-store) - Save and load data like user preferences, app state, cache, etc
 - [electron-context-menu](https://github.com/sindresorhus/electron-context-menu) - Context menu for your Electron app
 - [electron-dl](https://github.com/sindresorhus/electron-dl) - Simplified file downloads for your Electron app
 - [electron-unhandled](https://github.com/sindresorhus/electron-unhandled) - Catch unhandled errors and promise rejections in your Electron app
-- [electron-is-dev](https://github.com/sindresorhus/electron-is-dev) - Check if Electron is running in development
+- [electron-reloader](https://github.com/sindresorhus/electron-reloader) - Simple auto-reloading for Electron apps during development
+- [electron-serve](https://github.com/sindresorhus/electron-serve) - Static file serving for Electron apps
 - [debug-menu](https://github.com/parro-it/debug-menu) - Chrome-like debug context-menu for Electron
 
 

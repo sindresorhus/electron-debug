@@ -8,47 +8,55 @@ const isMacOS = process.platform === 'darwin';
 
 const devToolsOptions = {};
 
-function toggleDevTools(win = BrowserWindow.getFocusedWindow()) {
-	if (win) {
-		const {webContents} = win;
-		if (webContents.isDevToolsOpened()) {
-			webContents.closeDevTools();
+function getFocusedWebContents() {
+	if (electron.webContents.getFocusedWebContents()) {
+		return electron.webContents.getFocusedWebContents();
+	}
+	if (BrowserWindow.getFocusedWindow()) {
+		return BrowserWindow.getFocusedWindow().webContents;
+	}
+	return null;
+}
+
+function toggleDevTools(focusedWebContents = getFocusedWebContents()) {
+	if (focusedWebContents) {
+		if (focusedWebContents.isDevToolsOpened()) {
+			focusedWebContents.closeDevTools();
 		} else {
-			webContents.openDevTools(devToolsOptions);
+			focusedWebContents.openDevTools(devToolsOptions);
 		}
 	}
 }
 
-function devTools(win = BrowserWindow.getFocusedWindow()) {
-	if (win) {
-		toggleDevTools(win);
+function devTools(focusedWebContents = getFocusedWebContents()) {
+	if (focusedWebContents) {
+		toggleDevTools(focusedWebContents);
 	}
 }
 
-function openDevTools(win = BrowserWindow.getFocusedWindow()) {
-	if (win) {
-		win.webContents.openDevTools(devToolsOptions);
+function openDevTools(focusedWebContents = getFocusedWebContents()) {
+	if (focusedWebContents) {
+		focusedWebContents.openDevTools(devToolsOptions);
 	}
 }
 
-function refresh(win = BrowserWindow.getFocusedWindow()) {
-	if (win) {
-		win.webContents.reloadIgnoringCache();
+function refresh(focusedWebContents = getFocusedWebContents()) {
+	if (focusedWebContents) {
+		focusedWebContents.reloadIgnoringCache();
 	}
 }
 
-function inspectElements() {
-	const win = BrowserWindow.getFocusedWindow();
+function inspectElements(focusedWebContents = getFocusedWebContents()) {
 	const inspect = () => {
-		win.devToolsWebContents.executeJavaScript('DevToolsAPI.enterInspectElementMode()');
+		focusedWebContents.devToolsWebContents.executeJavaScript('DevToolsAPI.enterInspectElementMode()');
 	};
 
-	if (win) {
-		if (win.webContents.isDevToolsOpened()) {
+	if (focusedWebContents) {
+		if (focusedWebContents.isDevToolsOpened()) {
 			inspect();
 		} else {
-			win.webContents.once('devtools-opened', inspect);
-			win.openDevTools();
+			focusedWebContents.on('devtools-opened', inspect);
+			focusedWebContents.openDevTools();
 		}
 	}
 }
@@ -92,7 +100,7 @@ module.exports = opts => {
 
 			/// Workaround for https://github.com/electron/electron/issues/12438
 			win.webContents.once('dom-ready', () => {
-				openDevTools(win, opts.showDevTools);
+				openDevTools(win.webContents, opts.showDevTools);
 			});
 		}
 	});

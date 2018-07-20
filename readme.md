@@ -94,32 +94,32 @@ Values: `undocked` `right` `bottom` `previous`
 
 The dock state to open DevTools in.
 
-### devTools([window])
+### devTools([webContents])
 
-Toggle DevTools for the specified `BrowserWindow` instance or the focused one.
+Toggle DevTools for the specified `WebContents` instance or the focused one.
 
-#### window
+#### webContents
 
-Type: `BrowserWindow`<br>
-Default: The focused `BrowserWindow`
+Type: `WebContents`<br>
+Default: The focused `WebContents`
 
-### refresh([window])
+### refresh([webContents])
 
-Reload the specified `BrowserWindow` instance or the focused one.
+Reload the specified `WebContents` instance or the focused one.
 
-#### window
+#### webContents
 
-Type: `BrowserWindow`<br>
-Default: The focused `BrowserWindow`
+Type: `WebContents`<br>
+Default: The focused `WebContents`
 
-### openDevTools([window])
+### openDevTools([webContents])
 
-Open DevTools for the specified `BrowserWindow` instance or the focused one.
+Open DevTools for the specified `WebContents` instance or the focused one.
 
-#### window
+#### webContents
 
-Type: `BrowserWindow`<br>
-Default: The focused `BrowserWindow`
+Type: `WebContents`<br>
+Default: The focused `WebContents`
 
 
 ## Related

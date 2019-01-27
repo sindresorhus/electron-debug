@@ -90,7 +90,7 @@ Show DevTools on each created `BrowserWindow`.
 
 Type: `string`<br>
 Default: `undocked`<br>
-Values: `undocked` `right` `bottom` `previous`
+Values: `undocked` `right` `bottom` `previous` `detach`
 
 The dock state to open DevTools in.
 

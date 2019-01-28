@@ -42,20 +42,20 @@ export default function electronDebug(options?: Readonly<Options>): void;
 /**
  * Reload the specified `BrowserWindow` instance or the focused one.
  *
- * @param window - Default: BrowserWindow.getFocusedWindow()
+ * @param [window]
  */
-export function refresh(window?: BrowserWindow): void;
+export function refresh(window?: BrowserWindow = BrowserWindow.getFocusedWindow()): void;
 
 /**
  * Toggle DevTools for the specified `BrowserWindow` instance or the focused one.
  *
- * @param window - Default: BrowserWindow.getFocusedWindow()
+ * @param [window]
  */
-export function devTools(window?: BrowserWindow): void;
+export function devTools(window?: BrowserWindow = BrowserWindow.getFocusedWindow()): void;
 
 /**
  * Open DevTools for the specified `BrowserWindow` instance or the focused one.
  *
- * @param window - Default: BrowserWindow.getFocusedWindow()
+ * @param [window]
  */
-export function openDevTools(window?: BrowserWindow): void;
+export function openDevTools(window?: BrowserWindow = BrowserWindow.getFocusedWindow()): void;

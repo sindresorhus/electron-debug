@@ -68,7 +68,7 @@ let win;
 
 ## API
 
-Only runs when in [development](https://github.com/sindresorhus/electron-is-dev), unless overridden by the `enabled` option. So no need to guard it for production.
+Only runs when in [development](https://github.com/sindresorhus/electron-is-dev), unless overridden by the `isEnabled` option. So no need to guard it for production.
 
 ### electronDebug([options])
 
@@ -78,7 +78,7 @@ Install keyboard shortcuts and optionally activate DevTools on each created `Bro
 
 Type: `Object`
 
-##### enabled
+##### isEnabled
 
 Type: `boolean`
 

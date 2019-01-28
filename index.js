@@ -68,12 +68,12 @@ const addExtensionIfInstalled = (name, getPath) => {
 
 module.exports = options => {
 	options = Object.assign({
-		enabled: null,
+		isEnabled: null,
 		showDevTools: true,
 		devToolsMode: 'undocked'
 	}, options);
 
-	if (options.enabled === false || (options.enabled === null && !isDev)) {
+	if (options.isEnabled === false || (options.isEnabled === null && !isDev)) {
 		return;
 	}
 

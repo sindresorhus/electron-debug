@@ -1,7 +1,8 @@
 'use strict';
 const electron = require('electron');
+const debug = require('.');
 
-require('.')();
+debug();
 
 function load(url) {
 	const win = new electron.BrowserWindow({show: true});

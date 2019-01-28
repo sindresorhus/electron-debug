@@ -66,23 +66,23 @@ const addExtensionIfInstalled = (name, getPath) => {
 	} catch (_) {}
 };
 
-module.exports = opts => {
-	opts = Object.assign({
+module.exports = options => {
+	options = Object.assign({
 		enabled: null,
 		showDevTools: true,
 		devToolsMode: 'undocked'
-	}, opts);
+	}, options);
 
-	if (opts.enabled === false || (opts.enabled === null && !isDev)) {
+	if (options.enabled === false || (options.enabled === null && !isDev)) {
 		return;
 	}
 
-	if (opts.devToolsMode !== 'previous') {
-		devToolsOptions.mode = opts.devToolsMode;
+	if (options.devToolsMode !== 'previous') {
+		devToolsOptions.mode = options.devToolsMode;
 	}
 
 	app.on('browser-window-created', (event, win) => {
-		if (opts.showDevTools) {
+		if (options.showDevTools) {
 			win.webContents.once('devtools-opened', () => {
 				// Workaround for https://github.com/electron/electron/issues/13095
 				setImmediate(() => {
@@ -92,7 +92,7 @@ module.exports = opts => {
 
 			/// Workaround for https://github.com/electron/electron/issues/12438
 			win.webContents.once('dom-ready', () => {
-				openDevTools(win, opts.showDevTools);
+				openDevTools(win, options.showDevTools);
 			});
 		}
 	});

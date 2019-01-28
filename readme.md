@@ -54,14 +54,15 @@ $ npm install electron-debug
 
 ```js
 const {app, BrowserWindow} = require('electron');
+const debug = require('electron-debug');
 
-require('electron-debug')();
+debug();
 
 let win;
-
-app.on('ready', () => {
+(async () => {
+	await app.whenReady();
 	win = new BrowserWindow();
-});
+})();
 ```
 
 
@@ -74,6 +75,8 @@ Only runs when in [development](https://github.com/sindresorhus/electron-is-dev)
 Install keyboard shortcuts and optionally activate DevTools on each created `BrowserWindow`.
 
 #### options
+
+Type: `Object`
 
 ##### enabled
 

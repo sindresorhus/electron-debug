@@ -11,10 +11,11 @@
 	},
 	"scripts": {
 		"start": "electron test.js",
-		"test": "xo"
+		"test": "xo && tsd-check"
 	},
 	"files": [
-		"index.js"
+		"index.js",
+		"index.d.ts"
 	],
 	"keywords": [
 		"electron",
@@ -33,6 +34,7 @@
 		"devtron": "^1.1.0",
 		"electron": "^2.0.2",
 		"electron-react-devtools": "^0.5.3",
+		"tsd-check": "^0.3.0",
 		"xo": "*"
 	},
 	"xo": {

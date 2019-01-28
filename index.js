@@ -110,6 +110,8 @@ module.exports = opts => {
 	});
 };
 
+module.exports.default = module.exports;
+
 module.exports.refresh = refresh;
 module.exports.devTools = devTools;
 module.exports.openDevTools = openDevTools;

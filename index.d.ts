@@ -35,7 +35,7 @@ export interface Options {
  * 	win = new BrowserWindow();
  * });
  */
-export default function electronDebug(options?: Options): void;
+export default function electronDebug(options?: Readonly<Options>): void;
 
 /**
  * Reload the specified `BrowserWindow` instance or the focused one.

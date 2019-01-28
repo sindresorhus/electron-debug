@@ -4,21 +4,21 @@ export interface Options {
 	/**
 	 * Default: [Only in development](https://github.com/sindresorhus/electron-is-dev)
 	 */
-	enabled?: boolean;
+	readonly enabled?: boolean;
 
 	/**
 	 * Show DevTools on each created `BrowserWindow`.
 	 *
 	 * @default true
 	 */
-	showDevTools?: boolean;
+	readonly showDevTools?: boolean;
 
 	/**
 	 * The dock state to open DevTools in.
 	 *
 	 * @default 'undocked'
 	 */
-	devToolsMode?: 'undocked' | 'right' | 'bottom' | 'previous' | 'detach';
+	readonly devToolsMode?: 'undocked' | 'right' | 'bottom' | 'previous' | 'detach';
 }
 
 /**
@@ -37,7 +37,7 @@ export interface Options {
  * 	win = new BrowserWindow();
  * });
  */
-export default function electronDebug(options?: Readonly<Options>): void;
+export default function electronDebug(options?: Options): void;
 
 /**
  * Reload the specified `BrowserWindow` instance or the focused one.

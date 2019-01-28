@@ -1,3 +1,5 @@
+import { BrowserWindow } from "electron";
+
 export interface Options {
 	/**
 	 * Default: [Only in development](https://github.com/sindresorhus/electron-is-dev)
@@ -42,18 +44,18 @@ export default function electronDebug(options?: Readonly<Options>): void;
  *
  * @param window - Default: BrowserWindow.getFocusedWindow()
  */
-export function refresh(window?: Electron.BrowserWindow): void;
+export function refresh(window?: BrowserWindow): void;
 
 /**
  * Toggle DevTools for the specified `BrowserWindow` instance or the focused one.
  *
  * @param window - Default: BrowserWindow.getFocusedWindow()
  */
-export function devTools(window?: Electron.BrowserWindow): void;
+export function devTools(window?: BrowserWindow): void;
 
 /**
  * Open DevTools for the specified `BrowserWindow` instance or the focused one.
  *
  * @param window - Default: BrowserWindow.getFocusedWindow()
  */
-export function openDevTools(window?: Electron.BrowserWindow): void;
+export function openDevTools(window?: BrowserWindow): void;

@@ -43,7 +43,7 @@ Just install any of these extension and they'll be activated for you:
 $ npm install electron-debug
 ```
 
-*Requires Electron 2.0.0 or later.*
+*Requires Electron 4 or later.*
 
 <a href="https://www.patreon.com/sindresorhus">
 	<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">

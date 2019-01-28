@@ -1,9 +1,8 @@
 'use strict';
-const electron = require('electron');
+const {app, BrowserWindow} = require('electron');
 const localShortcut = require('electron-localshortcut');
 const isDev = require('electron-is-dev');
 
-const {app, BrowserWindow} = electron;
 const isMacOS = process.platform === 'darwin';
 
 const devToolsOptions = {};
@@ -67,11 +66,12 @@ const addExtensionIfInstalled = (name, getPath) => {
 };
 
 module.exports = options => {
-	options = Object.assign({
+	options = {
 		isEnabled: null,
 		showDevTools: true,
-		devToolsMode: 'undocked'
-	}, options);
+		devToolsMode: 'undocked',
+		...options
+	};
 
 	if (options.isEnabled === false || (options.isEnabled === null && !isDev)) {
 		return;
@@ -97,7 +97,9 @@ module.exports = options => {
 		}
 	});
 
-	app.on('ready', () => {
+	(async () => {
+		await app.whenReady();
+
 		addExtensionIfInstalled('devtron', name => require(name).path);
 		addExtensionIfInstalled('electron-react-devtools', name => require(name).path);
 
@@ -107,7 +109,7 @@ module.exports = options => {
 
 		localShortcut.register('CmdOrCtrl+R', refresh);
 		localShortcut.register('F5', refresh);
-	});
+	})();
 };
 
 module.exports.default = module.exports;

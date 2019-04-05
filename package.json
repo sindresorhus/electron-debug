@@ -11,7 +11,7 @@
 	},
 	"scripts": {
 		"start": "electron test.js",
-		"test": "xo && tsd-check"
+		"test": "xo && tsd"
 	},
 	"files": [
 		"index.js",
@@ -28,14 +28,15 @@
 	],
 	"dependencies": {
 		"electron-is-dev": "^0.3.0",
-		"electron-localshortcut": "^3.0.0"
+		"electron-localshortcut": "^3.1.0"
 	},
 	"devDependencies": {
-		"devtron": "^1.1.0",
+		"@types/node": "^11.13.0",
+		"devtron": "^1.4.0",
 		"electron": "^2.0.2",
 		"electron-react-devtools": "^0.5.3",
-		"tsd-check": "^0.3.0",
-		"xo": "*"
+		"tsd": "^0.7.2",
+		"xo": "^0.24.0"
 	},
 	"xo": {
 		"envs": [

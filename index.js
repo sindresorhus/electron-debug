@@ -103,11 +103,11 @@ module.exports = options => {
 		addExtensionIfInstalled('devtron', name => require(name).path);
 		addExtensionIfInstalled('electron-react-devtools', name => require(name).path);
 
-		localShortcut.register('CmdOrCtrl+Shift+C', inspectElements);
-		localShortcut.register(isMacOS ? 'Cmd+Alt+I' : 'Ctrl+Shift+I', devTools);
+		localShortcut.register('CommandOrControl+Shift+C', inspectElements);
+		localShortcut.register(isMacOS ? 'Command+Alt+I' : 'Control+Shift+I', devTools);
 		localShortcut.register('F12', devTools);
 
-		localShortcut.register('CmdOrCtrl+R', refresh);
+		localShortcut.register('CommandOrControl+R', refresh);
 		localShortcut.register('F5', refresh);
 	})();
 };

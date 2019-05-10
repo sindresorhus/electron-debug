@@ -4,13 +4,14 @@ const debug = require('.');
 
 debug();
 
-function load(url) {
+const load = async url => {
 	const win = new electron.BrowserWindow({show: true});
-	win.loadURL(url);
-	win.setMenu(null);
-}
+	await win.loadURL(url);
+	win.removeMenu();
+};
 
-electron.app.on('ready', () => {
-	load(`file://${__dirname}/fixture.html`);
-	load('https://google.com');
-});
+(async () => {
+	await electron.app.whenReady();
+	await load(`file://${__dirname}/fixture.html`);
+	await load('https://google.com');
+})();

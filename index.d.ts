@@ -35,14 +35,14 @@ declare const electronDebug: {
 	@example
 	```
 	import {app, BrowserWindow} from 'electron';
-	import electronDebug = require('electron-debug');
+	import debug = require('electron-debug');
 
-	electronDebug();
+	debug();
 
-	let win;
+	let mainWindow;
 	(async () => {
 		await app.whenReady();
-		win = new BrowserWindow();
+		mainWindow = new BrowserWindow();
 	});
 	```
 	*/
@@ -68,9 +68,6 @@ declare const electronDebug: {
 	@param window - Default: `BrowserWindow.getFocusedWindow()`
 	*/
 	openDevTools(window?: BrowserWindow): void;
-
-	// TODO: Remove this for the next major release
-	default: typeof electronDebug;
 };
 
 export = electronDebug;

@@ -43,7 +43,7 @@ Just install any of these extension and they'll be activated for you:
 $ npm install electron-debug
 ```
 
-*Requires Electron 4 or later.*
+*Requires Electron 5 or later.*
 
 <a href="https://www.patreon.com/sindresorhus">
 	<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
@@ -58,10 +58,10 @@ const debug = require('electron-debug');
 
 debug();
 
-let win;
+let mainWindow;
 (async () => {
 	await app.whenReady();
-	win = new BrowserWindow();
+	mainWindow = new BrowserWindow();
 })();
 ```
 
@@ -76,7 +76,7 @@ Install keyboard shortcuts and optionally activate DevTools on each created `Bro
 
 #### options
 
-Type: `Object`
+Type: `object`
 
 ##### isEnabled
 
@@ -92,8 +92,8 @@ Show DevTools on each created `BrowserWindow`.
 ##### devToolsMode
 
 Type: `string`<br>
-Default: `undocked`<br>
-Values: `undocked` `right` `bottom` `previous` `detach`
+Default: `'undocked'`<br>
+Values: `'undocked'` `'right'` `'bottom'` `'previous'` `'detach'`
 
 The dock state to open DevTools in.
 

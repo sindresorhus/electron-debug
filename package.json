@@ -27,13 +27,13 @@
 		"development"
 	],
 	"dependencies": {
-		"electron-is-dev": "^0.3.0",
+		"electron-is-dev": "^1.1.0",
 		"electron-localshortcut": "^3.1.0"
 	},
 	"devDependencies": {
-		"@types/node": "^11.13.0",
+		"@types/node": "^12.0.0",
 		"devtron": "^1.4.0",
-		"electron": "^2.0.2",
+		"electron": "^5.0.1",
 		"electron-react-devtools": "^0.5.3",
 		"tsd": "^0.7.2",
 		"xo": "^0.24.0"

@@ -83,16 +83,9 @@ module.exports = options => {
 
 	app.on('browser-window-created', (event, win) => {
 		if (options.showDevTools) {
-			win.webContents.once('devtools-opened', () => {
-				// Workaround for https://github.com/electron/electron/issues/13095
-				setImmediate(() => {
-					win.focus();
-				});
-			});
-
 			/// Workaround for https://github.com/electron/electron/issues/12438
 			win.webContents.once('dom-ready', () => {
-				openDevTools(win, options.showDevTools);
+				openDevTools(win, options.showDevTools, false);
 			});
 		}
 	});
@@ -111,9 +104,6 @@ module.exports = options => {
 		localShortcut.register('F5', refresh);
 	})();
 };
-
-// TODO: Remove this for the next major release
-module.exports.default = module.exports;
 
 module.exports.refresh = refresh;
 module.exports.devTools = devTools;

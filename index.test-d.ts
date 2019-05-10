@@ -7,7 +7,7 @@ import {refresh, devTools, openDevTools} from '.';
 
 expectType<void>(
 	electronDebug({
-		enabled: true,
+		isEnabled: true,
 		showDevTools: true
 	})
 );

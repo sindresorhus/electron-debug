@@ -5,7 +5,7 @@ declare namespace electronDebug {
 		/**
 		Default: [Only in development](https://github.com/sindresorhus/electron-is-dev)
 		*/
-		readonly enabled?: boolean;
+		readonly isEnabled?: boolean;
 
 		/**
 		Show DevTools on each created `BrowserWindow`.

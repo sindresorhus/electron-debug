@@ -1,6 +1,6 @@
 {
 	"name": "electron-debug",
-	"version": "2.1.0",
+	"version": "2.2.0",
 	"description": "Adds useful debug features to your Electron app",
 	"license": "MIT",
 	"repository": "sindresorhus/electron-debug",
@@ -11,7 +11,7 @@
 	},
 	"scripts": {
 		"start": "electron test.js",
-		"test": "xo && tsd-check"
+		"test": "xo && tsd"
 	},
 	"files": [
 		"index.js",
@@ -27,14 +27,15 @@
 		"development"
 	],
 	"dependencies": {
-		"electron-is-dev": "^1.0.1",
-		"electron-localshortcut": "^3.0.0"
+		"electron-is-dev": "^0.3.0",
+		"electron-localshortcut": "^3.1.0"
 	},
 	"devDependencies": {
-		"devtron": "^1.1.0",
-		"electron": "^4.0.2",
+		"@types/node": "^11.13.0",
+		"devtron": "^1.4.0",
+		"electron": "^2.0.2",
 		"electron-react-devtools": "^0.5.3",
-		"tsd-check": "^0.3.0",
+		"tsd": "^0.7.2",
 		"xo": "^0.24.0"
 	},
 	"xo": {

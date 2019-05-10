@@ -1,61 +1,76 @@
 import {BrowserWindow} from 'electron';
 
-export interface Options {
-	/**
-	 * Default: [Only in development](https://github.com/sindresorhus/electron-is-dev)
-	 */
-	readonly isEnabled?: boolean;
+declare namespace electronDebug {
+	interface Options {
+		/**
+		Default: [Only in development](https://github.com/sindresorhus/electron-is-dev)
+		*/
+		readonly isEnabled?: boolean;
 
-	/**
-	 * Show DevTools on each created `BrowserWindow`.
-	 *
-	 * @default true
-	 */
-	readonly showDevTools?: boolean;
+		/**
+		Show DevTools on each created `BrowserWindow`.
 
-	/**
-	 * The dock state to open DevTools in.
-	 *
-	 * @default 'undocked'
-	 */
-	readonly devToolsMode?: 'undocked' | 'right' | 'bottom' | 'previous' | 'detach';
+		@default true
+		*/
+		readonly showDevTools?: boolean;
+
+		/**
+		The dock state to open DevTools in.
+
+		@default 'undocked'
+		*/
+		readonly devToolsMode?:
+			| 'undocked'
+			| 'right'
+			| 'bottom'
+			| 'previous'
+			| 'detach';
+	}
 }
 
-/**
- * Install keyboard shortcuts and optionally activate DevTools on each created `BrowserWindow`.
- *
- * @example
- *
- * import {app, BrowserWindow} from 'electron';
- * import electronDebug from 'electron-debug';
- *
- * electronDebug();
- *
- * let win;
- * (async () => {
- * 	await app.whenReady();
- * 	win = new BrowserWindow();
- * });
- */
-export default function electronDebug(options?: Options): void;
+declare const electronDebug: {
+	/**
+	Install keyboard shortcuts and optionally activate DevTools on each created `BrowserWindow`.
 
-/**
- * Reload the specified `BrowserWindow` instance or the focused one.
- *
- * @param window - Default: `BrowserWindow.getFocusedWindow()`
- */
-export function refresh(window?: BrowserWindow): void;
+	@example
+	```
+	import {app, BrowserWindow} from 'electron';
+	import electronDebug = require('electron-debug');
 
-/**
- * Toggle DevTools for the specified `BrowserWindow` instance or the focused one.
- *
- * @param window - Default: `BrowserWindow.getFocusedWindow()`
- */
-export function devTools(window?: BrowserWindow): void;
+	electronDebug();
 
-/**
- * Open DevTools for the specified `BrowserWindow` instance or the focused one.
- *
- * @param window - Default: `BrowserWindow.getFocusedWindow()`
- */
-export function openDevTools(window?: BrowserWindow): void;
+	let win;
+	(async () => {
+		await app.whenReady();
+		win = new BrowserWindow();
+	});
+	```
+	*/
+	(options?: electronDebug.Options): void;
+
+	/**
+	Reload the specified `BrowserWindow` instance or the focused one.
+
+	@param window - Default: `BrowserWindow.getFocusedWindow()`
+	*/
+	refresh(window?: BrowserWindow): void;
+
+	/**
+	Toggle DevTools for the specified `BrowserWindow` instance or the focused one.
+
+	@param window - Default: `BrowserWindow.getFocusedWindow()`
+	*/
+	devTools(window?: BrowserWindow): void;
+
+	/**
+	Open DevTools for the specified `BrowserWindow` instance or the focused one.
+
+	@param window - Default: `BrowserWindow.getFocusedWindow()`
+	*/
+	openDevTools(window?: BrowserWindow): void;
+
+	// TODO: Remove this for the next major release
+	default: typeof electronDebug;
+};
+
+export = electronDebug;

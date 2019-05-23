@@ -45,10 +45,6 @@ $ npm install electron-debug
 
 *Requires Electron 5 or later.*
 
-<a href="https://www.patreon.com/sindresorhus">
-	<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
-</a>
-
 
 ## Usage
 
@@ -135,8 +131,3 @@ Default: The focused `BrowserWindow`
 - [electron-reloader](https://github.com/sindresorhus/electron-reloader) - Simple auto-reloading for Electron apps during development
 - [electron-serve](https://github.com/sindresorhus/electron-serve) - Static file serving for Electron apps
 - [debug-menu](https://github.com/parro-it/debug-menu) - Chrome-like debug context-menu for Electron
-
-
-## License
-
-MIT © [Sindre Sorhus](https://sindresorhus.com)

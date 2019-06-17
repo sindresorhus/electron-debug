@@ -1,5 +1,5 @@
 'use strict';
-const { app, BrowserWindow } = require('electron');
+const {app, BrowserWindow} = require('electron');
 const localShortcut = require('electron-localshortcut');
 const isDev = require('electron-is-dev');
 
@@ -9,7 +9,7 @@ const devToolsOptions = {};
 
 function toggleDevTools(win = BrowserWindow.getFocusedWindow()) {
 	if (win) {
-		const { webContents } = win;
+		const {webContents} = win;
 		if (webContents.isDevToolsOpened()) {
 			webContents.closeDevTools();
 		} else {

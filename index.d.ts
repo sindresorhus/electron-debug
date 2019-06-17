@@ -1,4 +1,4 @@
-import {BrowserWindow} from 'electron';
+import { BrowserWindow } from 'electron';
 
 declare namespace electronDebug {
 	interface Options {
@@ -17,14 +17,14 @@ declare namespace electronDebug {
 		/**
 		The dock state to open DevTools in.
 
-		@default 'undocked'
+		@default 'previous'
 		*/
 		readonly devToolsMode?:
-			| 'undocked'
-			| 'right'
-			| 'bottom'
-			| 'previous'
-			| 'detach';
+		| 'undocked'
+		| 'right'
+		| 'bottom'
+		| 'previous'
+		| 'detach';
 	}
 }
 

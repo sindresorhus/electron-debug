@@ -17,7 +17,7 @@ declare namespace electronDebug {
 		/**
 		The dock state to open DevTools in.
 
-		@default 'undocked'
+		@default 'previous'
 		*/
 		readonly devToolsMode?:
 			| 'undocked'

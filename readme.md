@@ -88,7 +88,7 @@ Show DevTools on each created `BrowserWindow`.
 ##### devToolsMode
 
 Type: `string`<br>
-Default: `'undocked'`<br>
+Default: `'previous'`<br>
 Values: `'undocked'` `'right'` `'bottom'` `'previous'` `'detach'`
 
 The dock state to open DevTools in.

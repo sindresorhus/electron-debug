@@ -69,7 +69,7 @@ module.exports = options => {
 	options = {
 		isEnabled: null,
 		showDevTools: true,
-		devToolsMode: 'undocked',
+		devToolsMode: 'previous',
 		...options
 	};
 

@@ -127,9 +127,7 @@ module.exports = options => {
 		await app.whenReady();
 		addDevtron();
 		addReactDevTools();
-		addExtensionIfInstalled('devtron', name => require(name).path);
-		addExtensionIfInstalled('electron-react-devtools', name => require(name).path);
-
+		
 		localShortcut.register('CommandOrControl+Shift+C', inspectElements);
 		localShortcut.register(isMacOS ? 'Command+Alt+I' : 'Control+Shift+I', devTools);
 		localShortcut.register('F12', devTools);

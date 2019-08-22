@@ -65,6 +65,39 @@ const addExtensionIfInstalled = (name, getPath) => {
 	} catch (_) {}
 };
 
+const isExtensionInstalled = name => {
+	return BrowserWindow.getDevToolsExtensions &&
+		{}.hasOwnProperty.call(BrowserWindow.getDevToolsExtensions(), name);
+};
+
+const addDevtron = () => {
+	try {
+		if (!isExtensionInstalled('devtron')) {
+			const devtron = require('devtron');
+
+			if (devtron) {
+				BrowserWindow.addDevToolsExtension(devtron.path);
+			}
+		}
+	} catch (err) {
+		console.error(`Can't verify if devtron is already installed: ${err}`);
+	}
+};
+
+const addReactDevTools = () => {
+	try {
+		if (!isExtensionInstalled('electron-react-devtools')) {
+			const electronReactDevTools = require('electron-react-devtools');
+
+			if (electronReactDevTools) {
+				BrowserWindow.addDevToolsExtension(electronReactDevTools.path);
+			}
+		}
+	} catch (err) {
+		console.error(`Can't verify if react-dev-tools is already installed: ${err}`);
+	}
+};
+
 module.exports = options => {
 	options = {
 		isEnabled: null,
@@ -92,7 +125,8 @@ module.exports = options => {
 
 	(async () => {
 		await app.whenReady();
-
+		addDevtron();
+		addReactDevTools();
 		addExtensionIfInstalled('devtron', name => require(name).path);
 		addExtensionIfInstalled('electron-react-devtools', name => require(name).path);
 

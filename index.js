@@ -54,19 +54,23 @@ function inspectElements() {
 
 const addExtensionIfInstalled = (name, getPath) => {
 	const isExtensionInstalled = name => {
+		// Use chrome extensions api if available (electron >=9)
 		if (session.defaultSession.getAllExtensions) {
 			return {}.hasOwnProperty.call(session.defaultSession.getAllExtensions(), name);
 		}
 
+		// TODO: remove this when targeting electron >=9
 		return BrowserWindow.getDevToolsExtensions &&
 			{}.hasOwnProperty.call(BrowserWindow.getDevToolsExtensions(), name);
 	};
 
 	try {
 		if (!isExtensionInstalled(name)) {
+			// Use chrome extensions api if available (electron >=9)
 			if (session.defaultSession.loadExtension) {
 				session.defaultSession.loadExtension(getPath(name));
 			} else {
+				// TODO: remove this when targeting electron >=9
 				BrowserWindow.addDevToolsExtension(getPath(name));
 			}
 		}

@@ -5,9 +5,9 @@ const debug = require('.');
 debug();
 
 const load = async url => {
-	const win = new electron.BrowserWindow({show: true});
-	await win.loadURL(url);
-	win.removeMenu();
+	const window_ = new electron.BrowserWindow({show: true});
+	await window_.loadURL(url);
+	window_.removeMenu();
 };
 
 (async () => {

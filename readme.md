@@ -2,7 +2,6 @@
 
 > Adds useful debug features to your [Electron](https://electronjs.org) app
 
-
 ## Features
 
 ### DevTools
@@ -36,7 +35,6 @@ Just install any of these extension and they'll be activated for you:
 - [devtron](https://electronjs.org/devtron) - The official Electron DevTools extension
 - [electron-react-devtools](https://github.com/firejune/electron-react-devtools) - React DevTools extension for Electron
 
-
 ## Install
 
 ```
@@ -44,7 +42,6 @@ $ npm install electron-debug
 ```
 
 *Requires Electron 5 or later.*
-
 
 ## Usage
 
@@ -61,12 +58,11 @@ let mainWindow;
 })();
 ```
 
-
 ## API
 
 Only runs when in [development](https://github.com/sindresorhus/electron-is-dev), unless overridden by the `isEnabled` option. So no need to guard it for production.
 
-### electronDebug([options])
+### electronDebug(options?)
 
 Install keyboard shortcuts and optionally activate DevTools on each created `BrowserWindow`.
 
@@ -80,35 +76,35 @@ Type: `boolean`
 
 ##### showDevTools
 
-Type: `boolean`<br>
+Type: `boolean`\
 Default: `true`
 
 Show DevTools on each created `BrowserWindow`.
 
 ##### devToolsMode
 
-Type: `string`<br>
-Default: `'previous'`<br>
+Type: `string`\
+Default: `'previous'`\
 Values: `'undocked'` `'right'` `'bottom'` `'previous'` `'detach'`
 
 The dock state to open DevTools in.
 
-### devTools([window])
+### devTools(window?)
 
 Toggle DevTools for the specified `BrowserWindow` instance or the focused one.
 
 #### window
 
-Type: `BrowserWindow`<br>
+Type: `BrowserWindow`\
 Default: The focused `BrowserWindow`
 
-### refresh([window])
+### refresh(window?)
 
 Reload the specified `BrowserWindow` instance or the focused one.
 
 #### window
 
-Type: `BrowserWindow`<br>
+Type: `BrowserWindow`\
 Default: The focused `BrowserWindow`
 
 ### openDevTools([window])
@@ -117,9 +113,8 @@ Open DevTools for the specified `BrowserWindow` instance or the focused one.
 
 #### window
 
-Type: `BrowserWindow`<br>
+Type: `BrowserWindow`\
 Default: The focused `BrowserWindow`
-
 
 ## Related
 

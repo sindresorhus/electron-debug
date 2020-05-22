@@ -4,10 +4,11 @@
 	"description": "Adds useful debug features to your Electron app",
 	"license": "MIT",
 	"repository": "sindresorhus/electron-debug",
+	"funding": "https://github.com/sponsors/sindresorhus",
 	"author": {
 		"name": "Sindre Sorhus",
 		"email": "sindresorhus@gmail.com",
-		"url": "sindresorhus.com"
+		"url": "https://sindresorhus.com"
 	},
 	"scripts": {
 		"start": "electron test.js",

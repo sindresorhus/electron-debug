@@ -1,5 +1,5 @@
 'use strict';
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow, session} = require('electron');
 const localShortcut = require('electron-localshortcut');
 const isDev = require('electron-is-dev');
 
@@ -54,13 +54,25 @@ function inspectElements() {
 
 const addExtensionIfInstalled = (name, getPath) => {
 	const isExtensionInstalled = name => {
+		// For Electron >=9.
+		if (session.defaultSession.getAllExtensions) {
+			return {}.hasOwnProperty.call(session.defaultSession.getAllExtensions(), name);
+		}
+
+		// TODO: Remove this when targeting Electron >=9.
 		return BrowserWindow.getDevToolsExtensions &&
 			{}.hasOwnProperty.call(BrowserWindow.getDevToolsExtensions(), name);
 	};
 
 	try {
 		if (!isExtensionInstalled(name)) {
-			BrowserWindow.addDevToolsExtension(getPath(name));
+			// For Electron >=9.
+			if (session.defaultSession.loadExtension) {
+				session.defaultSession.loadExtension(getPath(name));
+			} else {
+				// TODO: Remove this when targeting Electron >=9.
+				BrowserWindow.addDevToolsExtension(getPath(name));
+			}
 		}
 	} catch (_) {}
 };

@@ -89,6 +89,13 @@ Values: `'undocked'` `'right'` `'bottom'` `'previous'` `'detach'`
 
 The dock state to open DevTools in.
 
+##### preloads
+
+Type: `(string) => string[]`\
+Default: `'(devtronPreloadFile) => [devtronPreloadFile]'`\
+
+Factory to provide scripts to set via `session#setPreloads`.
+
 ### devTools(window?)
 
 Toggle DevTools for the specified `BrowserWindow` instance or the focused one.

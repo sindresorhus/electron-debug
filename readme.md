@@ -92,7 +92,7 @@ The dock state to open DevTools in.
 ##### preloads
 
 Type: `(string) => string[]`\
-Default: `'(devtronPreloadFile) => [devtronPreloadFile]'`\
+Default: `(devtronPreloadFile) => [devtronPreloadFile]`
 
 Factory to provide scripts to set via `session#setPreloads`.
 

@@ -27,10 +27,10 @@ declare namespace electronDebug {
 			| 'detach';
 
 		/**
-		 Factory to provide scripts to set via [`session#setPreloads`](https://www.electronjs.org/docs/api/session#sessetpreloadspreloads).
+		Factory to provide scripts to set via [`session#setPreloads`](https://www.electronjs.org/docs/api/session#sessetpreloadspreloads).
 
-		 @default (devtronPreloadFile) => [devtronPreloadFile]
-		 */
+		@default (devtronPreloadFile) => [devtronPreloadFile]
+		*/
 		readonly preloads?: (devtronPreloadFile: string) => string[]
 	}
 }

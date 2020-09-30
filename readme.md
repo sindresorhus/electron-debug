@@ -89,13 +89,6 @@ Values: `'undocked'` `'right'` `'bottom'` `'previous'` `'detach'`
 
 The dock state to open DevTools in.
 
-##### preloads
-
-Type: `(string) => string[]`\
-Default: `(devtronPreloadFile) => [devtronPreloadFile]`
-
-Factory to provide scripts to set via `session#setPreloads`.
-
 ### devTools(window?)
 
 Toggle DevTools for the specified `BrowserWindow` instance or the focused one.
@@ -122,6 +115,11 @@ Open DevTools for the specified `BrowserWindow` instance or the focused one.
 
 Type: `BrowserWindow`\
 Default: The focused `BrowserWindow`
+
+### preloadScript
+
+The absolute path to a preload script that will enable devtron.
+Use it in a call to [`session#setPreloads`](https://www.electronjs.org/docs/api/session#sessetpreloadspreloads).
 
 ## Related
 

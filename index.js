@@ -83,7 +83,6 @@ module.exports = options => {
 		isEnabled: null,
 		showDevTools: true,
 		devToolsMode: 'previous',
-		preloads: devtronPreloadFile => [devtronPreloadFile],
 		...options
 	};
 
@@ -102,13 +101,6 @@ module.exports = options => {
 				openDevTools(win, options.showDevTools, false);
 			});
 		}
-
-		const ses = win.webContents.session;
-		// Provide the user the devtron preload file path
-		const devtronPreloadFile = path.join(__dirname, 'devtron-preload.js');
-		// Another call to setPreloads would remove the devtron preload script
-		// The options provide a factory so that the user can add multiple preload files
-		ses.setPreloads(options.preloads(devtronPreloadFile));
 	});
 
 	(async () => {
@@ -129,3 +121,4 @@ module.exports = options => {
 module.exports.refresh = refresh;
 module.exports.devTools = devTools;
 module.exports.openDevTools = openDevTools;
+module.exports.preloadScript = path.join(__dirname, 'preload.js');

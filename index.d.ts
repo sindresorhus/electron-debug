@@ -25,13 +25,6 @@ declare namespace electronDebug {
 			| 'bottom'
 			| 'previous'
 			| 'detach';
-
-		/**
-		Factory to provide scripts to set via [`session#setPreloads`](https://www.electronjs.org/docs/api/session#sessetpreloadspreloads).
-
-		@default (devtronPreloadFile) => [devtronPreloadFile]
-		*/
-		readonly preloads?: (devtronPreloadFile: string) => string[]
 	}
 }
 
@@ -75,6 +68,12 @@ declare const electronDebug: {
 	@param window - Default: `BrowserWindow.getFocusedWindow()`
 	*/
 	openDevTools(window?: BrowserWindow): void;
+
+	/**
+	The absolute path to a preload file that will enable devtron.
+	Use it in a call to [`session#setPreloads`](https://www.electronjs.org/docs/api/session#sessetpreloadspreloads).
+	*/
+	preloadScript: string;
 };
 
 export = electronDebug;

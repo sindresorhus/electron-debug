@@ -70,10 +70,10 @@ declare const electronDebug: {
 	openDevTools(window?: BrowserWindow): void;
 
 	/**
-	The absolute path to a preload file that will enable devtron.
+	The absolute path to a preload file that will enable `devtron`.
 	Use it in a call to [`session#setPreloads`](https://www.electronjs.org/docs/api/session#sessetpreloadspreloads).
 	*/
-	preloadScript: string;
+	preloadScriptPath: string;
 };
 
 export = electronDebug;

@@ -121,4 +121,4 @@ module.exports = options => {
 module.exports.refresh = refresh;
 module.exports.devTools = devTools;
 module.exports.openDevTools = openDevTools;
-module.exports.preloadScript = path.join(__dirname, 'preload.js');
+module.exports.preloadScriptPath = path.join(__dirname, 'preload.js');

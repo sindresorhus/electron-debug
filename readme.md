@@ -33,7 +33,7 @@ Open DevTools and focus the Element Inspector tool.
 Just install any of these extension and they'll be activated for you:
 
 - [devtron](https://electronjs.org/devtron) - The official Electron DevTools extension
-  - use [`preloadScriptPath`](#preloadScriptPath) to enable devtron, even when `BrowserWindow`'s `nodeIntegration` is turned off
+	- You need to use [`preloadScriptPath`](#preloadScriptPath) if the `BrowserWindow`'s `nodeIntegration` is off.
 - [electron-react-devtools](https://github.com/firejune/electron-react-devtools) - React DevTools extension for Electron
 
 ## Install
@@ -119,8 +119,11 @@ Default: The focused `BrowserWindow`
 
 ### preloadScriptPath
 
-The absolute path to a preload script, to use in [`session#setPreloads`](https://www.electronjs.org/docs/api/session#sessetpreloadspreloads).
-It will enable devtron, even when `nodeIntegration` is turned off in your [`BrowserWindow`'s `webPreferences`](https://www.electronjs.org/docs/api/browser-window#new-browserwindowoptions).
+Type: `string`
+
+The absolute path to a preload script to use in [`session#setPreloads()`](https://www.electronjs.org/docs/api/session#sessetpreloadspreloads).
+
+Use it to enable `devtron` even when [`nodeIntegration`](https://www.electronjs.org/docs/api/browser-window#new-browserwindowoptions) is turned off.
 
 ## Related
 

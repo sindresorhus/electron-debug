@@ -16,7 +16,8 @@
 	},
 	"files": [
 		"index.js",
-		"index.d.ts"
+		"index.d.ts",
+		"preload.js"
 	],
 	"keywords": [
 		"electron",

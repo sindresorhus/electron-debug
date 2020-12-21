@@ -1,5 +1,6 @@
 'use strict';
 const {app, BrowserWindow, session} = require('electron');
+const path = require('path');
 const localShortcut = require('electron-localshortcut');
 const isDev = require('electron-is-dev');
 
@@ -120,3 +121,4 @@ module.exports = options => {
 module.exports.refresh = refresh;
 module.exports.devTools = devTools;
 module.exports.openDevTools = openDevTools;
+module.exports.preloadScriptPath = path.join(__dirname, 'preload.js');

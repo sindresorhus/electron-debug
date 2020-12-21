@@ -68,6 +68,13 @@ declare const electronDebug: {
 	@param window - Default: `BrowserWindow.getFocusedWindow()`
 	*/
 	openDevTools(window?: BrowserWindow): void;
+
+	/**
+	The absolute path to a preload script to use in [`session#setPreloads()`](https://www.electronjs.org/docs/api/session#sessetpreloadspreloads).
+
+	Use it to enable `devtron` even when [`nodeIntegration`](https://www.electronjs.org/docs/api/browser-window#new-browserwindowoptions) is turned off.
+	*/
+	preloadScriptPath: string;
 };
 
 export = electronDebug;

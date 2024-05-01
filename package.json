@@ -1,6 +1,6 @@
 {
 	"name": "electron-debug",
-	"version": "3.2.0",
+	"version": "4.0.0",
 	"description": "Adds useful debug features to your Electron app",
 	"license": "MIT",
 	"repository": "sindresorhus/electron-debug",

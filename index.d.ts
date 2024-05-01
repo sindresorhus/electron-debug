@@ -1,80 +1,67 @@
-import {BrowserWindow} from 'electron';
+import {type BrowserWindow} from 'electron';
 
-declare namespace electronDebug {
-	interface Options {
-		/**
-		Default: [Only in development](https://github.com/sindresorhus/electron-is-dev)
-		*/
-		readonly isEnabled?: boolean;
-
-		/**
-		Show DevTools on each created `BrowserWindow`.
-
-		@default true
-		*/
-		readonly showDevTools?: boolean;
-
-		/**
-		The dock state to open DevTools in.
-
-		@default 'previous'
-		*/
-		readonly devToolsMode?:
-			| 'undocked'
-			| 'right'
-			| 'bottom'
-			| 'previous'
-			| 'detach';
-	}
-}
-
-declare const electronDebug: {
+export type Options = {
 	/**
-	Install keyboard shortcuts and optionally activate DevTools on each created `BrowserWindow`.
-
-	@example
-	```
-	import {app, BrowserWindow} from 'electron';
-	import debug = require('electron-debug');
-
-	debug();
-
-	let mainWindow;
-	(async () => {
-		await app.whenReady();
-		mainWindow = new BrowserWindow();
-	});
-	```
+	Default: [Only in development](https://github.com/sindresorhus/electron-is-dev)
 	*/
-	(options?: electronDebug.Options): void;
+	readonly isEnabled?: boolean;
 
 	/**
-	Reload the specified `BrowserWindow` instance or the focused one.
+	Show DevTools on each created `BrowserWindow`.
 
-	@param window - Default: `BrowserWindow.getFocusedWindow()`
+	@default true
 	*/
-	refresh(window?: BrowserWindow): void;
+	readonly showDevTools?: boolean;
 
 	/**
-	Toggle DevTools for the specified `BrowserWindow` instance or the focused one.
+	The dock state to open DevTools in.
 
-	@param window - Default: `BrowserWindow.getFocusedWindow()`
+	@default 'previous'
 	*/
-	devTools(window?: BrowserWindow): void;
-
-	/**
-	Open DevTools for the specified `BrowserWindow` instance or the focused one.
-
-	@param window - Default: `BrowserWindow.getFocusedWindow()`
-	*/
-	openDevTools(window?: BrowserWindow): void;
-
-	/**
-	The absolute path to a preload script to use in [`session#setPreloads()`](https://www.electronjs.org/docs/api/session#sessetpreloadspreloads).
-
-	Use it to enable `devtron` even when [`nodeIntegration`](https://www.electronjs.org/docs/api/browser-window#new-browserwindowoptions) is turned off.
-	*/
-	preloadScriptPath: string;
+	readonly devToolsMode?:
+	| 'undocked'
+	| 'right'
+	| 'bottom'
+	| 'previous'
+	| 'detach';
 };
 
-export = electronDebug;
+/**
+Install keyboard shortcuts and optionally activate DevTools on each created `BrowserWindow`.
+
+@example
+```
+import {app, BrowserWindow} from 'electron';
+import debug from 'electron-debug';
+
+debug();
+
+let mainWindow;
+(async () => {
+	await app.whenReady();
+	mainWindow = new BrowserWindow();
+});
+```
+*/
+export default function debug(options?: Options): void;
+
+/**
+Reload the specified `BrowserWindow` instance or the focused one.
+
+@param window - Default: `BrowserWindow.getFocusedWindow()`
+*/
+export function refresh(window?: BrowserWindow): void;
+
+/**
+Toggle DevTools for the specified `BrowserWindow` instance or the focused one.
+
+@param window - Default: `BrowserWindow.getFocusedWindow()`
+*/
+export function developmentTools(window?: BrowserWindow): void;
+
+/**
+Open DevTools for the specified `BrowserWindow` instance or the focused one.
+
+@param window - Default: `BrowserWindow.getFocusedWindow()`
+*/
+export function openDevelopmentTools(window?: BrowserWindow): void;

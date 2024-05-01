@@ -28,27 +28,19 @@ Open DevTools and focus the Element Inspector tool.
 - Linux: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>C</kbd>
 - Windows: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>C</kbd>
 
-### Activates DevTools extensions
-
-Just install any of these extension and they'll be activated for you:
-
-- [devtron](https://electronjs.org/devtron) - The official Electron DevTools extension
-	- You need to use [`preloadScriptPath`](#preloadScriptPath) if the `BrowserWindow`'s `nodeIntegration` is off.
-- [electron-react-devtools](https://github.com/firejune/electron-react-devtools) - React DevTools extension for Electron
-
 ## Install
 
-```
-$ npm install electron-debug
+```sh
+npm install electron-debug
 ```
 
-*Requires Electron 5 or later.*
+*Requires Electron 30 or later.*
 
 ## Usage
 
 ```js
-const {app, BrowserWindow} = require('electron');
-const debug = require('electron-debug');
+import {app, BrowserWindow} from 'electron';
+import debug from 'electron-debug';
 
 debug();
 
@@ -117,21 +109,12 @@ Open DevTools for the specified `BrowserWindow` instance or the focused one.
 Type: `BrowserWindow`\
 Default: The focused `BrowserWindow`
 
-### preloadScriptPath
-
-Type: `string`
-
-The absolute path to a preload script to use in [`session#setPreloads()`](https://www.electronjs.org/docs/api/session#sessetpreloadspreloads).
-
-Use it to enable `devtron` even when [`nodeIntegration`](https://www.electronjs.org/docs/api/browser-window#new-browserwindowoptions) is turned off.
-
 ## Related
 
 - [electron-util](https://github.com/sindresorhus/electron-util) - Useful utilities for developing Electron apps and modules
-- [electron-store](https://github.com/sindresorhus/electron-store) - Save and load data like user preferences, app state, cache, etc
+- [electron-store](https://github.com/sindresorhus/electron-store) - Save and load data like user settings, app state, cache, etc
 - [electron-context-menu](https://github.com/sindresorhus/electron-context-menu) - Context menu for your Electron app
 - [electron-dl](https://github.com/sindresorhus/electron-dl) - Simplified file downloads for your Electron app
 - [electron-unhandled](https://github.com/sindresorhus/electron-unhandled) - Catch unhandled errors and promise rejections in your Electron app
 - [electron-reloader](https://github.com/sindresorhus/electron-reloader) - Simple auto-reloading for Electron apps during development
 - [electron-serve](https://github.com/sindresorhus/electron-serve) - Static file serving for Electron apps
-- [debug-menu](https://github.com/parro-it/debug-menu) - Chrome-like debug context-menu for Electron

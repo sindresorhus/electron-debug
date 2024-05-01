@@ -10,14 +10,22 @@
 		"email": "sindresorhus@gmail.com",
 		"url": "https://sindresorhus.com"
 	},
+	"type": "module",
+	"exports": {
+		"types": "./index.d.ts",
+		"default": "./index.js"
+	},
+	"sideEffects": false,
+	"engines": {
+		"node": ">=18"
+	},
 	"scripts": {
 		"start": "electron test.js",
-		"test": "xo && tsd"
+		"test": "xo"
 	},
 	"files": [
 		"index.js",
-		"index.d.ts",
-		"preload.js"
+		"index.d.ts"
 	],
 	"keywords": [
 		"electron",
@@ -29,16 +37,14 @@
 		"development"
 	],
 	"dependencies": {
-		"electron-is-dev": "^1.1.0",
-		"electron-localshortcut": "^3.1.0"
+		"electron-is-dev": "^3.0.1",
+		"electron-localshortcut": "^3.2.1"
 	},
 	"devDependencies": {
-		"@types/node": "^12.0.0",
-		"devtron": "^1.4.0",
-		"electron": "^5.0.1",
+		"@types/node": "^20.12.7",
+		"electron": "^30.0.1",
 		"electron-react-devtools": "^0.5.3",
-		"tsd": "^0.7.2",
-		"xo": "^0.24.0"
+		"xo": "^0.58.0"
 	},
 	"xo": {
 		"envs": [

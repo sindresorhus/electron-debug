@@ -1,37 +1,38 @@
-'use strict';
-const {app, BrowserWindow, session} = require('electron');
-const path = require('path');
-const localShortcut = require('electron-localshortcut');
-const isDev = require('electron-is-dev');
+import process from 'node:process';
+import {app, BrowserWindow} from 'electron';
+import localShortcut from 'electron-localshortcut';
+import isDev from 'electron-is-dev';
 
 const isMacOS = process.platform === 'darwin';
 
-const devToolsOptions = {};
+const developmentToolsOptions = {};
 
-function toggleDevTools(win = BrowserWindow.getFocusedWindow()) {
+function toggleDevelopmentTools(win = BrowserWindow.getFocusedWindow()) {
 	if (win) {
 		const {webContents} = win;
 		if (webContents.isDevToolsOpened()) {
 			webContents.closeDevTools();
 		} else {
-			webContents.openDevTools(devToolsOptions);
+			webContents.openDevTools(developmentToolsOptions);
 		}
 	}
 }
 
-function devTools(win = BrowserWindow.getFocusedWindow()) {
+// eslint-disable-next-line unicorn/prevent-abbreviations
+export function devTools(win = BrowserWindow.getFocusedWindow()) {
 	if (win) {
-		toggleDevTools(win);
+		toggleDevelopmentTools(win);
 	}
 }
 
-function openDevTools(win = BrowserWindow.getFocusedWindow()) {
+// eslint-disable-next-line unicorn/prevent-abbreviations
+export function openDevTools(win = BrowserWindow.getFocusedWindow()) {
 	if (win) {
-		win.webContents.openDevTools(devToolsOptions);
+		win.webContents.openDevTools(developmentToolsOptions);
 	}
 }
 
-function refresh(win = BrowserWindow.getFocusedWindow()) {
+export function refresh(win = BrowserWindow.getFocusedWindow()) {
 	if (win) {
 		win.webContents.reloadIgnoringCache();
 	}
@@ -53,37 +54,12 @@ function inspectElements() {
 	}
 }
 
-const addExtensionIfInstalled = (name, getPath) => {
-	const isExtensionInstalled = name => {
-		// For Electron >=9.
-		if (session.defaultSession.getAllExtensions) {
-			return {}.hasOwnProperty.call(session.defaultSession.getAllExtensions(), name);
-		}
-
-		// TODO: Remove this when targeting Electron >=9.
-		return BrowserWindow.getDevToolsExtensions &&
-			{}.hasOwnProperty.call(BrowserWindow.getDevToolsExtensions(), name);
-	};
-
-	try {
-		if (!isExtensionInstalled(name)) {
-			// For Electron >=9.
-			if (session.defaultSession.loadExtension) {
-				session.defaultSession.loadExtension(getPath(name));
-			} else {
-				// TODO: Remove this when targeting Electron >=9.
-				BrowserWindow.addDevToolsExtension(getPath(name));
-			}
-		}
-	} catch (_) {}
-};
-
-module.exports = options => {
+export default function debug(options) {
 	options = {
 		isEnabled: null,
 		showDevTools: true,
 		devToolsMode: 'previous',
-		...options
+		...options,
 	};
 
 	if (options.isEnabled === false || (options.isEnabled === null && !isDev)) {
@@ -91,7 +67,7 @@ module.exports = options => {
 	}
 
 	if (options.devToolsMode !== 'previous') {
-		devToolsOptions.mode = options.devToolsMode;
+		developmentToolsOptions.mode = options.devToolsMode;
 	}
 
 	app.on('browser-window-created', (event, win) => {
@@ -106,19 +82,10 @@ module.exports = options => {
 	(async () => {
 		await app.whenReady();
 
-		addExtensionIfInstalled('devtron', name => require(name).path);
-		addExtensionIfInstalled('electron-react-devtools', name => require(name).path);
-
 		localShortcut.register('CommandOrControl+Shift+C', inspectElements);
 		localShortcut.register(isMacOS ? 'Command+Alt+I' : 'Control+Shift+I', devTools);
 		localShortcut.register('F12', devTools);
-
 		localShortcut.register('CommandOrControl+R', refresh);
 		localShortcut.register('F5', refresh);
 	})();
-};
-
-module.exports.refresh = refresh;
-module.exports.devTools = devTools;
-module.exports.openDevTools = openDevTools;
-module.exports.preloadScriptPath = path.join(__dirname, 'preload.js');
+}

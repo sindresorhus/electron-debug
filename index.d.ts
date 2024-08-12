@@ -57,11 +57,13 @@ Toggle DevTools for the specified `BrowserWindow` instance or the focused one.
 
 @param window - Default: `BrowserWindow.getFocusedWindow()`
 */
-export function developmentTools(window?: BrowserWindow): void;
+// eslint-disable-next-line unicorn/prevent-abbreviations
+export function devTools(window?: BrowserWindow): void;
 
 /**
 Open DevTools for the specified `BrowserWindow` instance or the focused one.
 
 @param window - Default: `BrowserWindow.getFocusedWindow()`
 */
-export function openDevelopmentTools(window?: BrowserWindow): void;
+// eslint-disable-next-line unicorn/prevent-abbreviations
+export function openDevTools(window?: BrowserWindow): void;

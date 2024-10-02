@@ -20,10 +20,22 @@ export type Options = {
 	*/
 	readonly devToolsMode?:
 	| 'undocked'
+	| 'left'
 	| 'right'
 	| 'bottom'
 	| 'previous'
 	| 'detach';
+
+	/**
+	Allows to select windows to apply the debug options to.
+	Accepts a function to filter each window and returns:
+	- `true` to apply the given options
+	- `false` to skip the window (not apply debug)
+	- `Options` to override the global options
+
+	@default `() => true`
+	*/
+	windowSelector?: (window: Readonly<BrowserWindow>) => boolean | Partial<Options>;
 };
 
 /**

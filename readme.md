@@ -109,6 +109,20 @@ Open DevTools for the specified `BrowserWindow` instance or the focused one.
 Type: `BrowserWindow`\
 Default: The focused `BrowserWindow`
 
+### windowSelector(filter)
+
+Allows to specify customized options for each window.
+
+#### filter
+
+Type: `(window: BrowserWindow) => boolean | Partial<Options>`\
+Default: `() => true` (Use the global options for every window).
+
+It can return:
+- `true`: Means `debug` is enabled for every window with the global options
+- `false`: Disable `debug` for the given window (maintain the global options for the rest)
+- `Partial<Options>`: Object to override the global options just for the given window
+
 ## Related
 
 - [electron-util](https://github.com/sindresorhus/electron-util) - Useful utilities for developing Electron apps and modules

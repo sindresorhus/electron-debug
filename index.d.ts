@@ -20,6 +20,7 @@ export type Options = {
 	*/
 	readonly devToolsMode?:
 	| 'undocked'
+	| 'left'
 	| 'right'
 	| 'bottom'
 	| 'previous'

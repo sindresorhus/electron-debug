@@ -111,17 +111,22 @@ Default: The focused `BrowserWindow`
 
 ### windowSelector(filter)
 
-Allows to specify customized options for each window.
+Specify customized options for each window.
 
 #### filter
 
 Type: `(window: BrowserWindow) => boolean | Partial<Options>`\
 Default: `() => true` (Use the global options for every window).
 
-It can return:
-- `true`: Means `debug` is enabled for every window with the global options
-- `false`: Disable `debug` for the given window (maintain the global options for the rest)
-- `Partial<Options>`: Object to override the global options just for the given window
+##### window
+
+Window to apply the filter or new options to
+
+##### Return value
+
+- `true`: To enable `debug` with the global options for the given `window`.
+- `false`: Disable `debug` for the given `window` (same as returning `{ isEnabled: false }`).
+- `Partial<Options>`: Object to extend and/or override the global options just for the given `window`.
 
 ## Related
 

@@ -27,13 +27,24 @@ export type Options = {
 	| 'detach';
 
 	/**
-	Allows to select windows to apply the debug options to.
-	Accepts a function to filter each window and returns:
-	- `true` to apply the given options
-	- `false` to skip the window (not apply debug)
-	- `Options` to override the global options
+	Specify customized options for each window.
+
+	@param window Window to apply the filter or new options to
+	@returns
+	- `true`: To enable `debug` with the global options for the given `window`.
+  - `false`: Disable `debug` for the given `window` (same as returning `{ isEnabled: false }`).
+  - `Partial<Options>`: Object to extend and/or override the global options just for the given `window`.
 
 	@default `() => true`
+
+	@example
+	```
+	import debug from 'electron-debug';
+
+	debug({
+	  windowSelector: (window) => window.title !== 'Debug tools',
+	});
+	```
 	*/
 	windowSelector?: (window: Readonly<BrowserWindow>) => boolean | Partial<Options>;
 };

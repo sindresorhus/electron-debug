@@ -37,24 +37,22 @@ function getOptionsForWindow(win, options) {
 			: {...options, ...newOptions});
 }
 
-function registerAccelerators(win = BrowserWindow.getFocusedWindow()) {
-	(async () => {
-		await app.whenReady();
+async function registerAccelerators(win = BrowserWindow.getFocusedWindow()) {
+	await app.whenReady();
 
-		if (win) {
-			localShortcut.register(win, 'CommandOrControl+Shift+C', inspectElements);
-			localShortcut.register(win, isMacOS ? 'Command+Alt+I' : 'Control+Shift+I', devTools);
-			localShortcut.register(win, 'F12', devTools);
-			localShortcut.register(win, 'CommandOrControl+R', refresh);
-			localShortcut.register(win, 'F5', refresh);
-		} else {
-			localShortcut.register('CommandOrControl+Shift+C', inspectElements);
-			localShortcut.register(isMacOS ? 'Command+Alt+I' : 'Control+Shift+I', devTools);
-			localShortcut.register('F12', devTools);
-			localShortcut.register('CommandOrControl+R', refresh);
-			localShortcut.register('F5', refresh);
-		}
-	})();
+	if (win) {
+		localShortcut.register(win, 'CommandOrControl+Shift+C', inspectElements);
+		localShortcut.register(win, isMacOS ? 'Command+Alt+I' : 'Control+Shift+I', devTools);
+		localShortcut.register(win, 'F12', devTools);
+		localShortcut.register(win, 'CommandOrControl+R', refresh);
+		localShortcut.register(win, 'F5', refresh);
+	} else {
+		localShortcut.register('CommandOrControl+Shift+C', inspectElements);
+		localShortcut.register(isMacOS ? 'Command+Alt+I' : 'Control+Shift+I', devTools);
+		localShortcut.register('F12', devTools);
+		localShortcut.register('CommandOrControl+R', refresh);
+		localShortcut.register('F5', refresh);
+	}
 }
 
 // eslint-disable-next-line unicorn/prevent-abbreviations

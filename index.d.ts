@@ -29,20 +29,19 @@ export type Options = {
 	/**
 	Specify customized options for each window.
 
-	@param window Window to apply the filter or new options to
-	@returns
-	- `true`: To enable `debug` with the global options for the given `window`.
-  - `false`: Disable `debug` for the given `window` (same as returning `{ isEnabled: false }`).
-  - `Partial<Options>`: Object to extend and/or override the global options just for the given `window`.
+	The accepted function receives the window to apply the filter or new options to.
+	It must return one of these values:
 
-	@default `() => true`
+	- `true`: To enable debug with the global options for the given window.
+	- `false`: Disable debug for the given window (same as returning { isEnabled: false }).
+	- `Partial<Options>`: Object to extend and/or override the global options just for the given window.
 
+	@default () => true
 	@example
 	```
 	import debug from 'electron-debug';
-
 	debug({
-	  windowSelector: (window) => window.title !== 'Debug tools',
+		windowSelector: (window) => window.title !== 'Debug tools',
 	});
 	```
 	*/

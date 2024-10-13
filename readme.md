@@ -120,7 +120,7 @@ Default: `() => true` (Use the global options for every window).
 
 ##### window
 
-Window to apply the filter or new options to
+Window to apply the filter or new options to.
 
 ##### Return value
 

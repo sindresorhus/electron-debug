@@ -82,6 +82,20 @@ Values: `'undocked'` `'right'` `'bottom'` `'previous'` `'detach'`
 
 The dock state to open DevTools in.
 
+##### windowSelector
+
+Type: `(window: BrowserWindow) => boolean | Partial<Options>`\
+Default: `() => true` (Use the global options for every window)
+
+Specify customized options for each window.
+
+The given function receives the window to apply the filter or new options to.
+
+It must return one of these values:
+- `true`: To enable debug with the global options for the given window.
+- `false`: Disable debug for the given window (same as returning `{isEnabled: false}`).
+- `Partial<Options>`: Object to override global options just for the given window. It does a shallow merge.
+
 ### devTools(window?)
 
 Toggle DevTools for the specified `BrowserWindow` instance or the focused one.
@@ -108,25 +122,6 @@ Open DevTools for the specified `BrowserWindow` instance or the focused one.
 
 Type: `BrowserWindow`\
 Default: The focused `BrowserWindow`
-
-### windowSelector(filter)
-
-Specify customized options for each window.
-
-#### filter
-
-Type: `(window: BrowserWindow) => boolean | Partial<Options>`\
-Default: `() => true` (Use the global options for every window).
-
-##### window
-
-Window to apply the filter or new options to.
-
-##### Return value
-
-- `true`: To enable debug with the global options for the given window.
-- `false`: Disable debug for the given window (same as returning `{isEnabled: false}`).
-- `Partial<Options>`: Object to override global options just for the given window. It does a shallow merge.
 
 ## Related
 

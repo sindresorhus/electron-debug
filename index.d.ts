@@ -33,15 +33,16 @@ export type Options = {
 	It must return one of these values:
 
 	- `true`: To enable debug with the global options for the given window.
-	- `false`: Disable debug for the given window (same as returning { isEnabled: false }).
-	- `Partial<Options>`: Object to extend and/or override the global options just for the given window.
+	- `false`: Disable debug for the given window (same as returning `{isEnabled: false}`).
+	- `Partial<Options>`: Object to override global options just for the given window. It does a shallow merge.
 
 	@default () => true
 	@example
 	```
 	import debug from 'electron-debug';
+
 	debug({
-		windowSelector: (window) => window.title !== 'Debug tools',
+		windowSelector: window => window.title !== 'Debug tools',
 	});
 	```
 	*/

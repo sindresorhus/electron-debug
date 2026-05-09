@@ -8,7 +8,18 @@ const isMacOS = process.platform === 'darwin';
 // A Map allows each window to have its own options
 const developmentToolsOptions = new Map();
 
-function toggleDevelopmentTools(win = BrowserWindow.getFocusedWindow()) {
+function assertMainProcess() {
+	if (!app || !BrowserWindow) {
+		throw new Error('electron-debug must be used from the Electron main process');
+	}
+}
+
+function getFocusedWindow() {
+	assertMainProcess();
+	return BrowserWindow.getFocusedWindow();
+}
+
+function toggleDevelopmentTools(win = getFocusedWindow()) {
 	if (win) {
 		const {webContents} = win;
 		if (webContents.isDevToolsOpened()) {
@@ -37,7 +48,7 @@ function getOptionsForWindow(win, options) {
 			: {...options, ...newOptions});
 }
 
-async function registerAccelerators(win = BrowserWindow.getFocusedWindow()) {
+async function registerAccelerators(win = getFocusedWindow()) {
 	await app.whenReady();
 
 	if (win) {
@@ -56,27 +67,27 @@ async function registerAccelerators(win = BrowserWindow.getFocusedWindow()) {
 }
 
 // eslint-disable-next-line unicorn/prevent-abbreviations
-export function devTools(win = BrowserWindow.getFocusedWindow()) {
+export function devTools(win = getFocusedWindow()) {
 	if (win) {
 		toggleDevelopmentTools(win);
 	}
 }
 
 // eslint-disable-next-line unicorn/prevent-abbreviations
-export function openDevTools(win = BrowserWindow.getFocusedWindow()) {
+export function openDevTools(win = getFocusedWindow()) {
 	if (win) {
 		win.webContents.openDevTools(developmentToolsOptions.get(win));
 	}
 }
 
-export function refresh(win = BrowserWindow.getFocusedWindow()) {
+export function refresh(win = getFocusedWindow()) {
 	if (win) {
 		win.webContents.reloadIgnoringCache();
 	}
 }
 
 function inspectElements() {
-	const win = BrowserWindow.getFocusedWindow();
+	const win = getFocusedWindow();
 	const inspect = () => {
 		win.devToolsWebContents.executeJavaScript('DevToolsAPI.enterInspectElementMode()');
 	};
@@ -99,10 +110,14 @@ export default function debug(options) {
 		...options,
 	};
 
-	if (!options.windowSelector) {
+	if (options.windowSelector) {
+		assertMainProcess();
+	} else {
 		if (!shouldRun(options)) {
 			return;
 		}
+
+		assertMainProcess();
 
 		// When there's no filter, accelerators are defined globally
 		registerAccelerators();

@@ -28,6 +28,16 @@ Open DevTools and focus the Element Inspector tool.
 - Linux: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>C</kbd>
 - Windows: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>C</kbd>
 
+### Content Tracing
+
+Start and stop Electron content tracing.
+
+- macOS: <kbd>Cmd</kbd> <kbd>Shift</kbd> <kbd>T</kbd>
+- Linux: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>T</kbd>
+- Windows: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>T</kbd>
+
+Requires the `contentTracing` option.
+
 ## Install
 
 ```sh
@@ -81,6 +91,34 @@ Default: `'previous'`\
 Values: `'undocked'` `'right'` `'bottom'` `'previous'` `'detach'`
 
 The dock state to open DevTools in.
+
+##### contentTracing
+
+Type: `boolean | object`\
+Default: `false`
+
+Enable a keyboard shortcut that starts and stops Electron content tracing.
+
+When enabled, electron-debug reads tracing options from `contentTracingOptions.json` in the launch directory. If the file does not exist, it is created with default tracing options. Stopping the trace writes a timestamped `content-tracing-*.json` file to the launch directory and opens it.
+
+```js
+debug({
+	contentTracing: true,
+});
+```
+
+The option can also be customized:
+
+```js
+debug({
+	contentTracing: {
+		shortcut: 'CommandOrControl+Alt+T',
+		optionsFile: 'tracing-options.json',
+		outputFile: 'trace.json',
+		openTraceFile: false,
+	},
+});
+```
 
 ##### windowSelector
 

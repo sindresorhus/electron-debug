@@ -1,5 +1,37 @@
 import {type BrowserWindow} from 'electron';
 
+export type ContentTracingOptions = {
+	/**
+	Keyboard shortcut used to start and stop content tracing.
+
+	@default 'CommandOrControl+Shift+T'
+	*/
+	readonly shortcut?: string;
+
+	/**
+	Path to a JSON file containing the options passed to `contentTracing.startRecording()`.
+
+	Relative paths are resolved from the launch directory. If the file does not exist, it is created with default options.
+
+	@default 'contentTracingOptions.json'
+	*/
+	readonly optionsFile?: string;
+
+	/**
+	Path where `contentTracing.stopRecording()` should write the trace file.
+
+	Relative paths are resolved from the launch directory. If not specified, a timestamped `content-tracing-*.json` file is written to the launch directory.
+	*/
+	readonly outputFile?: string;
+
+	/**
+	Open the trace file after recording stops.
+
+	@default true
+	*/
+	readonly openTraceFile?: boolean;
+};
+
 export type Options = {
 	/**
 	Default: [Only in development](https://github.com/sindresorhus/electron-is-dev)
@@ -25,6 +57,15 @@ export type Options = {
 	| 'bottom'
 	| 'previous'
 	| 'detach';
+
+	/**
+	Enable a keyboard shortcut that starts and stops Electron content tracing.
+
+	Set to `true` to use the defaults, or pass an object to customize the shortcut, options file, output file, and whether the trace file is opened after recording stops.
+
+	@default false
+	*/
+	readonly contentTracing?: boolean | ContentTracingOptions;
 
 	/**
 	Specify customized options for each window.

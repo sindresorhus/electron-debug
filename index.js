@@ -1,9 +1,17 @@
 import process from 'node:process';
-import {app, BrowserWindow} from 'electron';
+import fs from 'node:fs';
+import path from 'node:path';
+import {app, BrowserWindow, contentTracing as electronContentTracing} from 'electron';
 import localShortcut from 'electron-localshortcut';
 import isDev from 'electron-is-dev';
 
 const isMacOS = process.platform === 'darwin';
+const contentTracingOptionsFile = 'contentTracingOptions.json';
+const defaultContentTracingOptions = {
+	// eslint-disable-next-line camelcase
+	included_categories: ['*'],
+};
+let isContentTracing = false;
 
 // A Map allows each window to have its own options
 const developmentToolsOptions = new Map();
@@ -37,7 +45,7 @@ function getOptionsForWindow(win, options) {
 			: {...options, ...newOptions});
 }
 
-async function registerAccelerators(win = BrowserWindow.getFocusedWindow()) {
+async function registerAccelerators(win = BrowserWindow.getFocusedWindow(), options = {}) {
 	await app.whenReady();
 
 	if (win) {
@@ -46,12 +54,55 @@ async function registerAccelerators(win = BrowserWindow.getFocusedWindow()) {
 		localShortcut.register(win, 'F12', devTools);
 		localShortcut.register(win, 'CommandOrControl+R', refresh);
 		localShortcut.register(win, 'F5', refresh);
+		if (options.contentTracing) {
+			localShortcut.register(win, 'CommandOrControl+Shift+T', contentTracing);
+		}
 	} else {
 		localShortcut.register('CommandOrControl+Shift+C', inspectElements);
 		localShortcut.register(isMacOS ? 'Command+Alt+I' : 'Control+Shift+I', devTools);
 		localShortcut.register('F12', devTools);
 		localShortcut.register('CommandOrControl+R', refresh);
 		localShortcut.register('F5', refresh);
+		if (options.contentTracing) {
+			localShortcut.register('CommandOrControl+Shift+T', contentTracing);
+		}
+	}
+}
+
+function getContentTracingOptions() {
+	const filePath = path.join(process.cwd(), contentTracingOptionsFile);
+
+	try {
+		return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+	} catch (error) {
+		if (error.code !== 'ENOENT') {
+			throw error;
+		}
+
+		fs.writeFileSync(filePath, `${JSON.stringify(defaultContentTracingOptions, undefined, '\t')}\n`);
+		return defaultContentTracingOptions;
+	}
+}
+
+async function toggleContentTracing() {
+	if (isContentTracing) {
+		const traceFilePath = path.join(process.cwd(), `content-tracing-${Date.now()}.json`);
+		const resultFilePath = await electronContentTracing.stopRecording(traceFilePath);
+		isContentTracing = false;
+		process.stdout.write(`Content tracing stopped: ${resultFilePath}\n`);
+		return;
+	}
+
+	await electronContentTracing.startRecording(getContentTracingOptions());
+	isContentTracing = true;
+	process.stdout.write('Content tracing started. Press CommandOrControl+Shift+T again to stop.\n');
+}
+
+async function contentTracing() {
+	try {
+		await toggleContentTracing();
+	} catch (error) {
+		process.stderr.write(`Content tracing failed: ${error.message}\n`);
 	}
 }
 
@@ -96,6 +147,7 @@ export default function debug(options) {
 		isEnabled: null,
 		showDevTools: true,
 		devToolsMode: 'previous',
+		contentTracing: false,
 		...options,
 	};
 
@@ -105,7 +157,7 @@ export default function debug(options) {
 		}
 
 		// When there's no filter, accelerators are defined globally
-		registerAccelerators();
+		registerAccelerators(undefined, options);
 	}
 
 	app.on('browser-window-created', (event, win) => {
@@ -126,7 +178,7 @@ export default function debug(options) {
 
 			if (winOptions.windowSelector) {
 				// With filters, accelerators are defined for each window depending on their provided options
-				registerAccelerators(win);
+				registerAccelerators(win, winOptions);
 			}
 
 			if (winOptions.showDevTools) {

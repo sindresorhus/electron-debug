@@ -27,6 +27,15 @@ export type Options = {
 	| 'detach';
 
 	/**
+	Enable a keyboard shortcut for toggling Electron content tracing.
+
+	When enabled, <kbd>CommandOrControl</kbd> <kbd>Shift</kbd> <kbd>T</kbd> starts or stops tracing. Tracing options are read from `contentTracingOptions.json` in the launch directory. If the file is missing, it is created with default options.
+
+	@default false
+	*/
+	readonly contentTracing?: boolean;
+
+	/**
 	Specify customized options for each window.
 
 	The given function receives the window to apply the filter or new options to.

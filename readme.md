@@ -12,6 +12,8 @@ Toggle DevTools.
 - Linux: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>I</kbd> or <kbd>F12</kbd>
 - Windows: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>I</kbd> or <kbd>F12</kbd>
 
+Windows opened from the renderer with `window.open()` or links using `target="_blank"` are configured too.
+
 ### Reload
 
 Force reload the window.
@@ -57,7 +59,7 @@ Only runs when in [development](https://github.com/sindresorhus/electron-is-dev)
 
 ### electronDebug(options?)
 
-Install keyboard shortcuts and optionally activate DevTools on each created `BrowserWindow`.
+Install keyboard shortcuts and optionally activate DevTools on each created `BrowserWindow`, including windows opened from the renderer with `window.open()` or links using `target="_blank"`.
 
 #### options
 

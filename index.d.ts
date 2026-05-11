@@ -51,7 +51,7 @@ export type Options = {
 };
 
 /**
-Install keyboard shortcuts and optionally activate DevTools on each created `BrowserWindow`.
+Install keyboard shortcuts and optionally activate DevTools on each created `BrowserWindow`, including windows opened from the renderer with `window.open()` or links using `target="_blank"`.
 
 @example
 ```

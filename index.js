@@ -7,6 +7,9 @@ const isMacOS = process.platform === 'darwin';
 
 // A Map allows each window to have its own options
 const developmentToolsOptions = new Map();
+const configuredWindows = new WeakSet();
+const pendingWindows = new WeakSet();
+const windowsWithRendererCreatedWindowHandler = new WeakSet();
 
 function toggleDevelopmentTools(win = BrowserWindow.getFocusedWindow()) {
 	if (win) {
@@ -35,6 +38,59 @@ function getOptionsForWindow(win, options) {
 		: (newOptions === false
 			? {isEnabled: false}
 			: {...options, ...newOptions});
+}
+
+function registerRendererCreatedWindowHandler(win, options) {
+	if (windowsWithRendererCreatedWindowHandler.has(win)) {
+		return;
+	}
+
+	windowsWithRendererCreatedWindowHandler.add(win);
+	win.webContents.on('did-create-window', childWindow => {
+		configureWindow(childWindow, options);
+	});
+}
+
+function configureWindow(win, options) {
+	registerRendererCreatedWindowHandler(win, options);
+
+	if (pendingWindows.has(win) || configuredWindows.has(win)) {
+		return;
+	}
+
+	pendingWindows.add(win);
+
+	/// Workaround for https://github.com/electron/electron/issues/12438
+	win.webContents.once('dom-ready', () => {
+		pendingWindows.delete(win);
+
+		if (configuredWindows.has(win)) {
+			return;
+		}
+
+		configuredWindows.add(win);
+		const winOptions = getOptionsForWindow(win, options);
+
+		if (winOptions.devToolsMode !== 'previous') {
+			developmentToolsOptions.set(win, {
+				...developmentToolsOptions.get(win),
+				mode: winOptions.devToolsMode,
+			});
+		}
+
+		if (!shouldRun(winOptions)) {
+			return;
+		}
+
+		if (winOptions.windowSelector) {
+			// With filters, accelerators are defined for each window depending on their provided options
+			registerAccelerators(win);
+		}
+
+		if (winOptions.showDevTools) {
+			openDevTools(win);
+		}
+	});
 }
 
 async function registerAccelerators(win = BrowserWindow.getFocusedWindow()) {
@@ -109,29 +165,6 @@ export default function debug(options) {
 	}
 
 	app.on('browser-window-created', (event, win) => {
-		/// Workaround for https://github.com/electron/electron/issues/12438
-		win.webContents.once('dom-ready', () => {
-			const winOptions = getOptionsForWindow(win, options);
-
-			if (winOptions.devToolsMode !== 'previous') {
-				developmentToolsOptions.set(win, {
-					...developmentToolsOptions.get(win),
-					mode: winOptions.devToolsMode,
-				});
-			}
-
-			if (!shouldRun(winOptions)) {
-				return;
-			}
-
-			if (winOptions.windowSelector) {
-				// With filters, accelerators are defined for each window depending on their provided options
-				registerAccelerators(win);
-			}
-
-			if (winOptions.showDevTools) {
-				openDevTools(win);
-			}
-		});
+		configureWindow(win, options);
 	});
 }

@@ -28,6 +28,10 @@ Open DevTools and focus the Element Inspector tool.
 - Linux: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>C</kbd>
 - Windows: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>C</kbd>
 
+## Known limitations
+
+The shortcuts only work while the app window has focus. Electron does not deliver keyboard input to the DevTools web contents, so there is no way to detect the shortcut while DevTools itself has focus. Click the app window first, then use the shortcut.
+
 ## Install
 
 ```sh
@@ -72,13 +76,13 @@ Type: `boolean`
 Type: `boolean`\
 Default: `true`
 
-Show DevTools on each created `BrowserWindow`.
+Show DevTools on each `BrowserWindow`.
 
 ##### devToolsMode
 
 Type: `string`\
 Default: `'previous'`\
-Values: `'undocked'` `'right'` `'bottom'` `'previous'` `'detach'`
+Values: `'undocked'` `'left'` `'right'` `'bottom'` `'previous'` `'detach'`
 
 The dock state to open DevTools in.
 

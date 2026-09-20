@@ -7,7 +7,7 @@ export type Options = {
 	readonly isEnabled?: boolean;
 
 	/**
-	Show DevTools on each created `BrowserWindow`.
+	Show DevTools on each `BrowserWindow`.
 
 	@default true
 	*/

@@ -10,11 +10,7 @@ const developmentToolsOptions = new WeakMap();
 // The windows that already have the shortcut handler attached
 const registeredWindows = new WeakSet();
 
-/**
-The keyboard shortcuts and the accelerator each one responds to.
-
-The accelerator for the current platform is picked here, so `matchesAccelerator` only has to compare.
-*/
+// The keyboard shortcuts, and the accelerator each one responds to. The accelerator for the current platform is picked here, so `matchesAccelerator` only has to compare.
 const shortcuts = [
 	{accelerator: isMacOS ? 'Command+Shift+C' : 'Control+Shift+C', callback: inspectElements},
 	{accelerator: isMacOS ? 'Command+Alt+I' : 'Control+Shift+I', callback: devTools},
@@ -52,9 +48,7 @@ function getOptionsForWindow(win, options) {
 			: {...options, ...newOptions});
 }
 
-/**
-Check whether a key input matches an accelerator, for example `Command+Shift+C`. Every modifier the accelerator lists must be held, and no other modifier may be.
-*/
+// Check whether a key input matches an accelerator, for example `Command+Shift+C`. Every modifier the accelerator lists must be held, and no other modifier may be.
 function matchesAccelerator(accelerator, input) {
 	const parts = accelerator.split('+');
 	const key = parts.pop();
@@ -68,11 +62,7 @@ function matchesAccelerator(accelerator, input) {
 		&& input.control === parts.includes('Control');
 }
 
-/**
-Register the keyboard shortcuts on a window.
-
-The keys are handled here rather than by a shortcut package so that `event.preventDefault()` can be called. Without it, the default Electron menu also handles its own accelerator for the same keys, so the shortcut runs twice.
-*/
+// The keys are handled here rather than by a shortcut package so that `event.preventDefault()` can be called. Without it, the default Electron menu also handles its own accelerator for the same keys, so the shortcut runs twice.
 function registerShortcuts(win) {
 	if (registeredWindows.has(win)) {
 		return;
@@ -94,9 +84,7 @@ function registerShortcuts(win) {
 	});
 }
 
-/**
-Register the keyboard shortcuts on every window, including the windows created later.
-*/
+// Register the keyboard shortcuts on every window, including the windows created later.
 function registerShortcutsOnAllWindows() {
 	for (const win of BrowserWindow.getAllWindows()) {
 		registerShortcuts(win);
@@ -174,9 +162,7 @@ export default function debug(options) {
 	}
 }
 
-/**
-Apply the options to a window. Split out from the `browser-window-created` handler so windows that already exist when `debug()` is called get the same treatment.
-*/
+// Split out from the `browser-window-created` handler so windows that already exist when `debug()` is called get the same treatment.
 function applyOptionsToWindow(win, options) {
 	const winOptions = getOptionsForWindow(win, options);
 

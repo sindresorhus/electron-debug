@@ -37,8 +37,7 @@
 		"development"
 	],
 	"dependencies": {
-		"electron-is-dev": "^3.0.1",
-		"electron-localshortcut": "^3.2.1"
+		"electron-is-dev": "^3.0.1"
 	},
 	"devDependencies": {
 		"@types/node": "^20.12.7",

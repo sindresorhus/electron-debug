@@ -1,12 +1,27 @@
 import process from 'node:process';
 import {app, BrowserWindow} from 'electron';
-import localShortcut from 'electron-localshortcut';
 import isDev from 'electron-is-dev';
 
 const isMacOS = process.platform === 'darwin';
 
 // A Map allows each window to have its own options
 const developmentToolsOptions = new Map();
+
+// The windows that already have the shortcut handler attached
+const registeredWindows = new WeakSet();
+
+/**
+The keyboard shortcuts and the accelerator each one responds to.
+
+The accelerator for the current platform is picked here, so `matchesAccelerator` only has to compare.
+*/
+const shortcuts = [
+	{accelerator: isMacOS ? 'Command+Shift+C' : 'Control+Shift+C', callback: inspectElements},
+	{accelerator: isMacOS ? 'Command+Alt+I' : 'Control+Shift+I', callback: devTools},
+	{accelerator: 'F12', callback: devTools},
+	{accelerator: isMacOS ? 'Command+R' : 'Control+R', callback: refresh},
+	{accelerator: 'F5', callback: refresh},
+];
 
 function toggleDevelopmentTools(win = BrowserWindow.getFocusedWindow()) {
 	if (win) {
@@ -37,22 +52,59 @@ function getOptionsForWindow(win, options) {
 			: {...options, ...newOptions});
 }
 
-async function registerAccelerators(win = BrowserWindow.getFocusedWindow()) {
-	await app.whenReady();
+/**
+Check whether a key input matches an accelerator, for example `Command+Shift+C`. Every modifier the accelerator lists must be held, and no other modifier may be.
+*/
+function matchesAccelerator(accelerator, input) {
+	const parts = accelerator.split('+');
+	const key = parts.pop();
+	const code = /^F\d+$/.test(key) ? key : `Key${key}`;
 
-	if (win) {
-		localShortcut.register(win, 'CommandOrControl+Shift+C', inspectElements);
-		localShortcut.register(win, isMacOS ? 'Command+Alt+I' : 'Control+Shift+I', devTools);
-		localShortcut.register(win, 'F12', devTools);
-		localShortcut.register(win, 'CommandOrControl+R', refresh);
-		localShortcut.register(win, 'F5', refresh);
-	} else {
-		localShortcut.register('CommandOrControl+Shift+C', inspectElements);
-		localShortcut.register(isMacOS ? 'Command+Alt+I' : 'Control+Shift+I', devTools);
-		localShortcut.register('F12', devTools);
-		localShortcut.register('CommandOrControl+R', refresh);
-		localShortcut.register('F5', refresh);
+	// `code` is the physical key and `key` is what it types, so accept either to support other keyboard layouts
+	return (input.code === code || input.key.toLowerCase() === key.toLowerCase())
+		&& input.shift === parts.includes('Shift')
+		&& input.alt === parts.includes('Alt')
+		&& input.meta === parts.includes('Command')
+		&& input.control === parts.includes('Control');
+}
+
+/**
+Register the keyboard shortcuts on a window.
+
+The keys are handled here rather than by a shortcut package so that `event.preventDefault()` can be called. Without it, the default Electron menu also handles its own accelerator for the same keys, so the shortcut runs twice.
+*/
+function registerShortcuts(win) {
+	if (registeredWindows.has(win)) {
+		return;
 	}
+
+	registeredWindows.add(win);
+
+	win.webContents.on('before-input-event', (event, input) => {
+		if (input.type !== 'keyDown') {
+			return;
+		}
+
+		const matched = shortcuts.find(shortcut => matchesAccelerator(shortcut.accelerator, input));
+
+		if (matched) {
+			event.preventDefault();
+			matched.callback(win);
+		}
+	});
+}
+
+/**
+Register the keyboard shortcuts on every window, including the windows created later.
+*/
+function registerShortcutsOnAllWindows() {
+	for (const win of BrowserWindow.getAllWindows()) {
+		registerShortcuts(win);
+	}
+
+	app.on('browser-window-created', (event, win) => {
+		registerShortcuts(win);
+	});
 }
 
 // eslint-disable-next-line unicorn/prevent-abbreviations
@@ -75,19 +127,20 @@ export function refresh(win = BrowserWindow.getFocusedWindow()) {
 	}
 }
 
-function inspectElements() {
-	const win = BrowserWindow.getFocusedWindow();
+function inspectElements(win = BrowserWindow.getFocusedWindow()) {
+	if (!win) {
+		return;
+	}
+
 	const inspect = () => {
 		win.devToolsWebContents.executeJavaScript('DevToolsAPI.enterInspectElementMode()');
 	};
 
-	if (win) {
-		if (win.webContents.isDevToolsOpened()) {
-			inspect();
-		} else {
-			win.webContents.once('devtools-opened', inspect);
-			openDevTools(win);
-		}
+	if (win.webContents.isDevToolsOpened()) {
+		inspect();
+	} else {
+		win.webContents.once('devtools-opened', inspect);
+		openDevTools(win);
 	}
 }
 
@@ -104,8 +157,8 @@ export default function debug(options) {
 			return;
 		}
 
-		// When there's no filter, accelerators are defined globally
-		registerAccelerators();
+		// When there's no filter, the shortcuts are defined globally
+		registerShortcutsOnAllWindows();
 	}
 
 	app.on('browser-window-created', (event, win) => {
@@ -115,6 +168,7 @@ export default function debug(options) {
 		});
 	});
 
+	// A window that already exists may have fired `dom-ready` already, so it cannot wait for it
 	for (const win of BrowserWindow.getAllWindows()) {
 		applyOptionsToWindow(win, options);
 	}
@@ -138,8 +192,8 @@ function applyOptionsToWindow(win, options) {
 	}
 
 	if (winOptions.windowSelector) {
-		// With filters, accelerators are defined for each window depending on their provided options
-		registerAccelerators(win);
+		// With filters, the shortcuts are defined for each window depending on their provided options
+		registerShortcuts(win);
 	}
 
 	if (winOptions.showDevTools) {

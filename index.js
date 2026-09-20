@@ -4,8 +4,8 @@ import isDev from 'electron-is-dev';
 
 const isMacOS = process.platform === 'darwin';
 
-// A Map allows each window to have its own options
-const developmentToolsOptions = new Map();
+// A WeakMap allows each window to have its own options without keeping the window alive
+const developmentToolsOptions = new WeakMap();
 
 // The windows that already have the shortcut handler attached
 const registeredWindows = new WeakSet();

@@ -86,7 +86,7 @@ function inspectElements() {
 			inspect();
 		} else {
 			win.webContents.once('devtools-opened', inspect);
-			win.openDevTools();
+			openDevTools(win);
 		}
 	}
 }

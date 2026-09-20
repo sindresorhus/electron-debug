@@ -20,13 +20,16 @@ const shortcuts = [
 ];
 
 function toggleDevelopmentTools(win = BrowserWindow.getFocusedWindow()) {
-	if (win) {
-		const {webContents} = win;
-		if (webContents.isDevToolsOpened()) {
-			webContents.closeDevTools();
-		} else {
-			webContents.openDevTools(developmentToolsOptions.get(win));
-		}
+	if (!win) {
+		return;
+	}
+
+	const {webContents} = win;
+
+	if (webContents.isDevToolsOpened()) {
+		webContents.closeDevTools();
+	} else {
+		webContents.openDevTools(developmentToolsOptions.get(win));
 	}
 }
 
@@ -52,7 +55,7 @@ function getOptionsForWindow(win, options) {
 function matchesAccelerator(accelerator, input) {
 	const parts = accelerator.split('+');
 	const key = parts.pop();
-	const code = /^F\d+$/.test(key) ? key : `Key${key}`;
+	const code = /^F\d+$/v.test(key) ? key : `Key${key}`;
 
 	// `code` is the physical key and `key` is what it types, so accept either to support other keyboard layouts
 	return (input.code === code || input.key.toLowerCase() === key.toLowerCase())
@@ -77,10 +80,13 @@ function registerShortcuts(win) {
 
 		const matched = shortcuts.find(shortcut => matchesAccelerator(shortcut.accelerator, input));
 
-		if (matched) {
-			event.preventDefault();
-			matched.callback(win);
+		if (!matched) {
+			return;
 		}
+
+		// Stop the default Electron menu from also handling its accelerator for the same keys
+		event.preventDefault();
+		matched.callback(win);
 	});
 }
 
@@ -95,24 +101,28 @@ function registerShortcutsOnAllWindows() {
 	});
 }
 
-// eslint-disable-next-line unicorn/prevent-abbreviations
 export function devTools(win = BrowserWindow.getFocusedWindow()) {
-	if (win) {
-		toggleDevelopmentTools(win);
+	if (!win) {
+		return;
 	}
+
+	toggleDevelopmentTools(win);
 }
 
-// eslint-disable-next-line unicorn/prevent-abbreviations
 export function openDevTools(win = BrowserWindow.getFocusedWindow()) {
-	if (win) {
-		win.webContents.openDevTools(developmentToolsOptions.get(win));
+	if (!win) {
+		return;
 	}
+
+	win.webContents.openDevTools(developmentToolsOptions.get(win));
 }
 
 export function refresh(win = BrowserWindow.getFocusedWindow()) {
-	if (win) {
-		win.webContents.reloadIgnoringCache();
+	if (!win) {
+		return;
 	}
+
+	win.webContents.reloadIgnoringCache();
 }
 
 function inspectElements(win = BrowserWindow.getFocusedWindow()) {
@@ -121,7 +131,7 @@ function inspectElements(win = BrowserWindow.getFocusedWindow()) {
 	}
 
 	const inspect = () => {
-		win.devToolsWebContents.executeJavaScript('DevToolsAPI.enterInspectElementMode()');
+		win.webContents.devToolsWebContents.executeJavaScript('DevToolsAPI.enterInspectElementMode()');
 	};
 
 	if (win.webContents.isDevToolsOpened()) {

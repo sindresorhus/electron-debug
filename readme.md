@@ -38,7 +38,7 @@ The shortcuts only work while the app window has focus. Electron does not delive
 npm install electron-debug
 ```
 
-*Requires Electron 30 or later.*
+*Requires Electron 44 or later.*
 
 ## Usage
 
@@ -59,7 +59,7 @@ let mainWindow;
 
 Only runs when in [development](https://github.com/sindresorhus/electron-is-dev), unless overridden by the `isEnabled` option. So no need to guard it for production.
 
-### electronDebug(options?)
+### debug(options?)
 
 Install keyboard shortcuts and optionally activate DevTools on each `BrowserWindow`, including the ones that already exist when this is called.
 
@@ -69,7 +69,8 @@ Type: `object`
 
 ##### isEnabled
 
-Type: `boolean`
+Type: `boolean`\
+Default: [Only in development](https://github.com/sindresorhus/electron-is-dev)
 
 ##### showDevTools
 
@@ -118,7 +119,7 @@ Reload the specified `BrowserWindow` instance or the focused one.
 Type: `BrowserWindow`\
 Default: The focused `BrowserWindow`
 
-### openDevTools([window])
+### openDevTools(window?)
 
 Open DevTools for the specified `BrowserWindow` instance or the focused one.
 

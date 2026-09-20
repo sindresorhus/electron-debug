@@ -5,11 +5,7 @@
 	"license": "MIT",
 	"repository": "sindresorhus/electron-debug",
 	"funding": "https://github.com/sponsors/sindresorhus",
-	"author": {
-		"name": "Sindre Sorhus",
-		"email": "sindresorhus@gmail.com",
-		"url": "https://sindresorhus.com"
-	},
+	"author": "Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)",
 	"type": "module",
 	"exports": {
 		"types": "./index.d.ts",
@@ -17,11 +13,11 @@
 	},
 	"sideEffects": false,
 	"engines": {
-		"node": ">=18"
+		"node": ">=22"
 	},
 	"scripts": {
-		"start": "electron test.js",
-		"test": "xo"
+		"start": "electron example.js",
+		"test": "xo && node --test test.js"
 	},
 	"files": [
 		"index.js",
@@ -40,15 +36,20 @@
 		"electron-is-dev": "^3.0.1"
 	},
 	"devDependencies": {
-		"@types/node": "^20.12.7",
-		"electron": "^30.0.1",
-		"electron-react-devtools": "^0.5.3",
-		"xo": "^0.58.0"
+		"@types/node": "^26.6.2",
+		"electron": "^44.4.3",
+		"xo": "^5.0.1"
 	},
-	"xo": {
-		"envs": [
-			"node",
-			"browser"
-		]
-	}
+	"xo": [
+		{
+			"ignores": [
+				"fixture.html"
+			]
+		},
+		{
+			"rules": {
+				"unicorn/prefer-top-level-await": "off"
+			}
+		}
+	]
 }

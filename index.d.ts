@@ -19,12 +19,12 @@ export type Options = {
 	@default 'previous'
 	*/
 	readonly devToolsMode?:
-	| 'undocked'
-	| 'left'
-	| 'right'
-	| 'bottom'
-	| 'previous'
-	| 'detach';
+		| 'undocked'
+		| 'left'
+		| 'right'
+		| 'bottom'
+		| 'previous'
+		| 'detach';
 
 	/**
 	Specify customized options for each window.
@@ -64,7 +64,7 @@ let mainWindow;
 (async () => {
 	await app.whenReady();
 	mainWindow = new BrowserWindow();
-});
+})();
 ```
 */
 export default function debug(options?: Options): void;
@@ -81,7 +81,6 @@ Toggle DevTools for the specified `BrowserWindow` instance or the focused one.
 
 @param window - Default: `BrowserWindow.getFocusedWindow()`
 */
-// eslint-disable-next-line unicorn/prevent-abbreviations
 export function devTools(window?: BrowserWindow): void;
 
 /**
@@ -89,5 +88,4 @@ Open DevTools for the specified `BrowserWindow` instance or the focused one.
 
 @param window - Default: `BrowserWindow.getFocusedWindow()`
 */
-// eslint-disable-next-line unicorn/prevent-abbreviations
 export function openDevTools(window?: BrowserWindow): void;

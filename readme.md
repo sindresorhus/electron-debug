@@ -57,7 +57,7 @@ Only runs when in [development](https://github.com/sindresorhus/electron-is-dev)
 
 ### electronDebug(options?)
 
-Install keyboard shortcuts and optionally activate DevTools on each created `BrowserWindow`.
+Install keyboard shortcuts and optionally activate DevTools on each `BrowserWindow`, including the ones that already exist when this is called.
 
 #### options
 

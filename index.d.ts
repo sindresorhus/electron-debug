@@ -51,7 +51,7 @@ export type Options = {
 };
 
 /**
-Install keyboard shortcuts and optionally activate DevTools on each created `BrowserWindow`.
+Install keyboard shortcuts and optionally activate DevTools on each `BrowserWindow`, including the ones that already exist when this is called.
 
 @example
 ```

@@ -111,27 +111,38 @@ export default function debug(options) {
 	app.on('browser-window-created', (event, win) => {
 		/// Workaround for https://github.com/electron/electron/issues/12438
 		win.webContents.once('dom-ready', () => {
-			const winOptions = getOptionsForWindow(win, options);
-
-			if (winOptions.devToolsMode !== 'previous') {
-				developmentToolsOptions.set(win, {
-					...developmentToolsOptions.get(win),
-					mode: winOptions.devToolsMode,
-				});
-			}
-
-			if (!shouldRun(winOptions)) {
-				return;
-			}
-
-			if (winOptions.windowSelector) {
-				// With filters, accelerators are defined for each window depending on their provided options
-				registerAccelerators(win);
-			}
-
-			if (winOptions.showDevTools) {
-				openDevTools(win);
-			}
+			applyOptionsToWindow(win, options);
 		});
 	});
+
+	for (const win of BrowserWindow.getAllWindows()) {
+		applyOptionsToWindow(win, options);
+	}
+}
+
+/**
+Apply the options to a window. Split out from the `browser-window-created` handler so windows that already exist when `debug()` is called get the same treatment.
+*/
+function applyOptionsToWindow(win, options) {
+	const winOptions = getOptionsForWindow(win, options);
+
+	if (winOptions.devToolsMode !== 'previous') {
+		developmentToolsOptions.set(win, {
+			...developmentToolsOptions.get(win),
+			mode: winOptions.devToolsMode,
+		});
+	}
+
+	if (!shouldRun(winOptions)) {
+		return;
+	}
+
+	if (winOptions.windowSelector) {
+		// With filters, accelerators are defined for each window depending on their provided options
+		registerAccelerators(win);
+	}
+
+	if (winOptions.showDevTools) {
+		openDevTools(win);
+	}
 }
